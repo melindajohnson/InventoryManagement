@@ -19,13 +19,16 @@ Assumptions:
 #pragma once
 
 #include <stdio.h>
+#include <fstream>
 #include "BinarySearchTree.h"
 #include "Hashtable.h"
 #include "Item.h"
 #include "Coin.h"
 #include "ComicBook.h"
 #include "SportsCard.h"
+#include "CustomerTransactions.h"
 #include "Customer.h"
+using namespace std;
 
 class Store{
 private:
@@ -38,19 +41,19 @@ private:
     Preconditions: A store object is created
     Postconditions: The inventory tree is filled with items in the store
     */
-   void FillInventory();
+   void FillInventory(ifstream &inventoryFile);
    /**
     //-------------------------- FillCustomerData ------------------------------------//
     Preconditions: A store object is created
     Postconditions: The customerData hashtable is filled with customer information
     */
-   void FillCustomerData(Hashtable customerData);
+   void FillCustomerData(Hashtable customerData, ifstream &customerFile);
    /**
     //-------------------------- ProcessTransactions------------------------------------//
     Preconditions: A store object is created and inventorytree and customerData is filled with data
     Postconditions: The rootPtr of the Searchtree is initialized to a nullptr
     */
-   void ProcessTransactions(Hashtable customerData);
+   void ProcessTransactions(Hashtable customerData, ifstream &commandfile);
    
 public:
    /**
@@ -58,7 +61,7 @@ public:
     Preconditions: A store object is created and a hashtable object is created
     Postconditions: The inventory tree,inventoryHashtable, customerData Hashtable and transactionTree are all filled with data
     */
-   void processDataFiles(Hashtable customerData);
+   void processDataFiles(Hashtable customerData, ifstream &inventoryFile, ifstream &customerFile, ifstream &commandfile);
    
 };
 

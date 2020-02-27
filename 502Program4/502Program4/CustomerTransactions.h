@@ -6,8 +6,12 @@
  CustomerTransactions class:
  The CustomerTransactions class inherits from the Class Comparable and implements its pure virtual methods
  Data members include;
- name, year and grade whose access specifiers are protected so that derived class could inherit them
- The Class allows for comparison of 2 items based on their data members in a particular order.
+   --A struct transactions which contains
+      --A code of type char;
+      --A pointer to an Item object
+   --A pointer to an Customer object
+   --A vector called transactionList thats contains transactions
+ The Class allows for comparison of 2 items based on their customer object
  Assumptions:
  -- The class has a default constructor, destructor and an assignment operator
  */
@@ -20,7 +24,7 @@
 class CustomerTransactions : public Comparable {
 private:
    struct Transaction{
-      char code;
+      char code;  //code would S for sell and B for Buy
       Item* ptr;
    };
    
@@ -71,7 +75,7 @@ public:
     @return boolean true is left is smaller than right
     */
     bool operator<(const Comparable& right)const;
-   //checks if this objects customer name is smaller(in terms of ASCII value of each chaacter) than the right object
+   //checks if this customer objects is lesser than rights customer object
    /**
     //-------------------------- Overloaded greater than operator >  ------------------------------------//
     Determines if the item object on the left hand side is larger than the Item object on right hand side based on name of the item

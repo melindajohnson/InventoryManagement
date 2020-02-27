@@ -1,15 +1,32 @@
 
+/*
+ Store.cpp
+ Created by Melinda Stannah Stanley Jothiraj on 02/25/2020.
+ Student number- 1978413
+ The Store class contains two binary search trees -> one for the inventry and the other to holds Customer transactions.
+ The Store class also contains a hashtable for inventory control which helps in easy addition or removal of inventory for items in the store.
+ Assumptions:
+ -- The inventoryfile has correct formatting, but the data could be invalid.
+ -- The customerfile has correct formatting, but the data could be invalid(duplicates)
+ -- The commandFile has correct formatting, but the data could be invalid i.e not available or error codes
+ 
+ ErroHandling:
+ -- In the inventoryfile in case of invalid code, the line is skipped and file reading continues
+ -- In the customerfile in case of invalid code, the line is skipped and file reading continues
+ -- In the commandFile in case of invalid code, error messages are printed for incorrect data and then file reading continues
+ ---------------------------------------------------------------------------
+ */
 #include "Store.h"
 
-void Store::processDataFiles(Hashtable customerData){
-   FillInventory();
-   FillCustomerData(customerData);
-   ProcessTransactions(customerData);
+void Store::processDataFiles(Hashtable customerData, ifstream &inventoryFile, ifstream &customerFile, ifstream &commandfile){
+   FillInventory(inventoryFile);
+   FillCustomerData(customerData, customerFile);
+   ProcessTransactions(customerData, commandfile);
 }
-void Store::FillInventory(){
+void Store::FillInventory(ifstream &inventoryFile){
       //create a factory hashtable
-   Hashtable FactoryHashtable;
-      //create dummy points to derived class
+   Hashtable FactoryHashtable(3);
+      //create dummy pointer to derived classes
    Coin *dummyCoin = new Coin();
    ComicBook *dummycomic = new ComicBook();
    SportsCard *dummySportsCard = new SportsCard();
@@ -28,7 +45,7 @@ void Store::FillInventory(){
       inventoryTree.insert(ptr);
    }
 }
-void Store::FillCustomerData(Hashtable customerData){
+void Store::FillCustomerData(Hashtable customerData, ifstream &customerFile){
       //read customerdata file until eof
    for(;;){
          //read customer id and customer name
@@ -38,7 +55,7 @@ void Store::FillCustomerData(Hashtable customerData){
       customerData.insert(customerID, c1);
    }
 }
-void Store::ProcessTransactions(Hashtable customerData){
+void Store::ProcessTransactions(Hashtable customerData, ifstream &commandfile){
       //read command file until eof
    for(;;){
          

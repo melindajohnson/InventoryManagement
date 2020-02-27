@@ -1,4 +1,15 @@
 
+/*
+ Coin.h
+ Created by Melinda Stannah Stanley Jothiraj on 02/25/2020.
+ Student number- 1978413
+ Coin class:
+ The coin class inherits from the Class Item and overloads its virtual methods
+ There are no additional data members
+ The Class allows for comparison of 2 items based on their data members in a particular order.
+ Assumptions:
+ -- The class has a default constructor, destructor and an assignment operator
+ */
 #pragma once
 #include <stdio.h>
 #include "Item.h"

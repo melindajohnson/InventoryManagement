@@ -5,24 +5,26 @@
  Student number- 1978413
  Item class:
    The item class inherits from the Class Comparable and implements its pure virtual methods
+   The item class also inherits from the Class HashValueType
    Data members include;
-   name, year and grade whose access specifiers are protected so that derived class could inherit them
-   The Class allows for comparison of 2 items based on their data members in a particular order.
+   inventory, name, year and grade whose access specifiers are protected so that derived class could inherit them
+   The Class allows for comparison of 2 item objects based on the name 
  Assumptions:
  -- The class has a default constructor, destructor and an assignment operator
  */
 #pragma once
-
 #include <stdio.h>
 #include "Comparable.h"
 #include "HashValueType.h"
+
 class Item : public Comparable, public HashValueType {
 protected:
    
+   int inventory;
    std::string name;
    int year;
    std::string  grade;
-   int inventory;
+   
    
 public:
    /**
