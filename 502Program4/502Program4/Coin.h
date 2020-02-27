@@ -1,14 +1,69 @@
-//
-//  Coin.hpp
-//  502Program4
-//
-//  Created by Melinda Johnson on 2/25/20.
-//  Copyright © 2020 Melinda Johnson. All rights reserved.
-//
 
-#ifndef Coin_hpp
-#define Coin_hpp
-
+#pragma once
 #include <stdio.h>
-
-#endif /* Coin_hpp */
+#include "Item.h"
+class Coin : public Item{
+   
+public:
+   /**
+    //-------------------------- Default constructor  for class Coin  ------------------------------------//
+    Create and new Coin Object by calling Item constructor
+    */
+   Coin();
+   
+   /**
+    //-------------------------- Parametric constructor  for class Coin  ------------------------------------//
+    Create and new Item Object with deafault value where name = "n, year = y; grade = g, inventory = i
+    */
+   Coin(std::string n, int y, std::string g, int i);
+   
+   /**
+    //-------------------------- Destructor  for class Coin  ------------------------------------//
+    Destroys object and frees memory allocated by object.
+    */
+   virtual ~Coin();
+   
+    /**
+    //-------------------------- Parametric constructor  for class Coin  ------------------------------------//
+    Create and new Item Object with the description provided
+    */
+   Coin* create(std::string description);
+      
+    /**
+    //-------------------------- Overloaded equal to operator ==  ------------------------------------//
+    Determines if two Item are equal based on  data members
+    Preconditions: two item objects this and right
+    Postconditions:  boolean true if the left and right object are the same
+    @return boolean true if same or false if not
+    */
+    bool operator==(const Comparable& right) const;
+      // call itemClass operator== to make sure the two objects are Coins
+   /**
+    //-------------------------- Overloaded not equal to operator !=  ------------------------------------//
+    Determines if two Item are equal based on  data members 
+    Preconditions: two item objects this and right
+    Postconditions:  boolean false if the left and right object are the same
+    @return boolean true if different or false if not
+    */
+    bool operator!=(const Comparable& right)const;
+      //negate operator==
+   /**
+    //-------------------------- Overloaded lesser than operator <------------------------------------//
+    Determines if the item object on the left hand side is smaller than the Item object on right hand side based on name of the item
+    Preconditions: two item objects this and right
+    Postconditions: boolean true if the left hand side data is smaller than the data on the right hand side
+    @return boolean true is left is smaller than right
+    */
+    bool operator<(const Comparable& right)const;
+      // call itemClass operator< and if that returns true then start comparing the data members and return bool based on "Coins are sorted first by type, then by year, then by grade"
+   
+   /**
+    //-------------------------- Overloaded greater than operator >  ------------------------------------//
+    Determines if the item object on the left hand side is larger than the Item object on right hand side based on name of the item
+    Preconditions: two item objects this and right
+    Postconditions: boolean true if the left hand side data is larger than the data on the right hand side
+    @return boolean true is left is larger than right
+    */
+    bool operator>(const Comparable& right)const;
+      //negate operator<
+};

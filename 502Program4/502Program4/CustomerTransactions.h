@@ -1,14 +1,85 @@
-//
-//  CustomerTransactions.hpp
-//  502Program4
-//
-//  Created by Melinda Johnson on 2/25/20.
-//  Copyright © 2020 Melinda Johnson. All rights reserved.
-//
 
-#ifndef CustomerTransactions_hpp
-#define CustomerTransactions_hpp
-
+/*
+ CustomerTransactions.h
+ Created by Melinda Stannah Stanley Jothiraj on 02/25/2020.
+ Student number- 1978413
+ CustomerTransactions class:
+ The CustomerTransactions class inherits from the Class Comparable and implements its pure virtual methods
+ Data members include;
+ name, year and grade whose access specifiers are protected so that derived class could inherit them
+ The Class allows for comparison of 2 items based on their data members in a particular order.
+ Assumptions:
+ -- The class has a default constructor, destructor and an assignment operator
+ */
+#pragma once
 #include <stdio.h>
-
-#endif /* CustomerTransactions_hpp */
+#include <vector>
+#include "Comparable.h"
+#include "Customer.h"
+#include "Item.h"
+class CustomerTransactions : public Comparable {
+private:
+   struct Transaction{
+      char code;
+      Item* ptr;
+   };
+   
+   Customer* c;
+   std::vector<Transaction> transactionList;
+   
+public:
+   /**
+    //-------------------------- Default constructor  for class CustomerTransactions  ------------------------------------//
+    Create and new CustomerTransactions Object
+    */
+   CustomerTransactions();
+   
+   /**
+    //-------------------------- Parametric constructor  for class CustomerTransactions  ------------------------------------//
+    Create and new Item Object with
+    */
+   CustomerTransactions(Customer* c, std::string itemDescription);
+   
+   /**
+    //-------------------------- Destructor  for class CustomerTransactions  ------------------------------------//
+    Destroys object and frees memory allocated by object.
+    */
+   virtual ~CustomerTransactions();
+   /**
+    //-------------------------- Overloaded equal to operator ==  ------------------------------------//
+    Determines if two Item are equal based on  data members
+    Preconditions: two item objects this and right
+    Postconditions:  boolean true if the left and right object are the same
+    @return boolean true if same or false if not
+    */
+    bool operator==(const Comparable& right) const;
+    //check if both objects are the same
+   /**
+    //-------------------------- Overloaded not equal to operator !=  ------------------------------------//
+    Determines if two Item are equal based on  data members
+    Preconditions: two item objects this and right
+    Postconditions:  boolean false if the left and right object are the same
+    @return boolean true if different or false if not
+    */
+    bool operator!=(const Comparable& right)const;
+   //negates ==operator
+   /**
+    //-------------------------- Overloaded lesser than operator <------------------------------------//
+    Determines if the item object on the left hand side is smaller than the Item object on right hand side based on name of the item
+    Preconditions: two item objects this and right
+    Postconditions: boolean true if the left hand side data is smaller than the data on the right hand side
+    @return boolean true is left is smaller than right
+    */
+    bool operator<(const Comparable& right)const;
+   //checks if this objects customer name is smaller(in terms of ASCII value of each chaacter) than the right object
+   /**
+    //-------------------------- Overloaded greater than operator >  ------------------------------------//
+    Determines if the item object on the left hand side is larger than the Item object on right hand side based on name of the item
+    Preconditions: two item objects this and right
+    Postconditions: boolean true if the left hand side data is larger than the data on the right hand side
+    @return boolean true is left is larger than right
+    */
+    bool operator>(const Comparable& right)const;
+   //negates the <operator
+};
+ 

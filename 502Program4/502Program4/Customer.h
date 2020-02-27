@@ -1,14 +1,9 @@
-//
-//  Customer.hpp
-//  502Program4
-//
-//  Created by Melinda Johnson on 2/26/20.
-//  Copyright © 2020 Melinda Johnson. All rights reserved.
-//
-
-#ifndef Customer_hpp
-#define Customer_hpp
-
+#pragma once
 #include <stdio.h>
+#include <string>
+#include "HashValueType.h"
 
-#endif /* Customer_hpp */
+class Customer: public HashValueType{
+private:
+   std::string customerName;
+};

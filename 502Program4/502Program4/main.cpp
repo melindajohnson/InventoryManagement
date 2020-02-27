@@ -1,15 +1,13 @@
-//
-//  main.cpp
-//  502Program4
-//
-//  Created by Melinda Johnson on 2/25/20.
-//  Copyright © 2020 Melinda Johnson. All rights reserved.
-//
 
 #include <iostream>
+#include <string>
+#include "Store.h"
+#include "Hashtable.h"
 
-int main(int argc, const char * argv[]) {
-   // insert code here...
-   std::cout << "Hello, World!\n";
-   return 0;
+int main() {
+   
+   Store s1;
+   Hashtable customerData;
+   s1.processDataFiles(customerData);
+   
 }
