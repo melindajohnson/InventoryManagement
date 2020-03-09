@@ -35,12 +35,6 @@ public:
    virtual ~Coin();
    
     /**
-    //-------------------------- Parametric constructor  for class Coin  ------------------------------------//
-    Create and new Item Object with the description provided
-    */
-   Coin* create(std::string description);
-      
-    /**
     //-------------------------- Overloaded equal to operator ==  ------------------------------------//
     Determines if two Item are equal based on  data members
     Preconditions: two item objects this and right
@@ -48,7 +42,6 @@ public:
     @return boolean true if same or false if not
     */
     bool operator==(const Comparable& right) const;
-      // call itemClass operator== to make sure the two objects are Coins
    /**
     //-------------------------- Overloaded not equal to operator !=  ------------------------------------//
     Determines if two Item are equal based on  data members 
@@ -57,7 +50,7 @@ public:
     @return boolean true if different or false if not
     */
     bool operator!=(const Comparable& right)const;
-      //negate operator==
+
    /**
     //-------------------------- Overloaded lesser than operator <------------------------------------//
     Determines if the item object on the left hand side is smaller than the Item object on right hand side based on name of the item
@@ -66,8 +59,7 @@ public:
     @return boolean true is left is smaller than right
     */
     bool operator<(const Comparable& right)const;
-      // call itemClass operator< and if that returns true then start comparing the data members and return bool based on "Coins are sorted first by type, then by year, then by grade"
-   
+    
    /**
     //-------------------------- Overloaded greater than operator >  ------------------------------------//
     Determines if the item object on the left hand side is larger than the Item object on right hand side based on name of the item
@@ -76,5 +68,12 @@ public:
     @return boolean true is left is larger than right
     */
     bool operator>(const Comparable& right)const;
-      //negate operator<
+   
+   
+//   /**
+//    //-------------------------- Parametric constructor  for class Coin  ------------------------------------//
+//    Create and new Item Object with the description provided
+//    */
+//   Coin* create(std::string description);
+//   
 };

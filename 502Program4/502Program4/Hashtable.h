@@ -25,7 +25,7 @@ private:
       std::string key;
    };
    
-   static const int totalBuckets;
+   static const int totalBuckets = 101;
    HashEntry* table = new HashEntry[totalBuckets];
    
    /**

@@ -26,24 +26,40 @@ void Store::processDataFiles(Hashtable customerData, ifstream &inventoryFile, if
 void Store::FillInventory(ifstream &inventoryFile){
       //create a factory hashtable
    Hashtable FactoryHashtable(3);
+   ItemFactory itemFactory;
+   
       //create dummy pointer to derived classes
-   Coin *dummyCoin = new Coin();
-   ComicBook *dummycomic = new ComicBook();
-   SportsCard *dummySportsCard = new SportsCard();
-      //insert data in factory hashtable
-   FactoryHashtable.insert("M", dummyCoin);
-   FactoryHashtable.insert("C", dummycomic);
-   FactoryHashtable.insert("S", dummySportsCard);
+//   Coin *dummyCoin = new Coin();
+//   ComicBook *dummycomic = new ComicBook();
+//   SportsCard *dummySportsCard = new SportsCard();
+//      //insert data in factory hashtable
+//   FactoryHashtable.insert("M", dummyCoin);
+//   FactoryHashtable.insert("C", dummycomic);
+//   FactoryHashtable.insert("S", dummySportsCard);
       //read inventory file until eof
    for(;;){
-         //Code is the code obtained from file such as M, C or S and description is the name, year, grade and other details of that item
-         //if code doesnt exist in the hashtable skip over to the next line in file
-      std::string description ;
-      Item *ptr1 = dynamic_cast<Item*>(FactoryHashtable.getValue("Code"));
-      Item *ptr = ptr1->create(description);
-         //insert this itemPtr to the BST inventoryTree
+      if (inventoryFile.eof()) break;
+      std::string type;
+      std::string stringCount;
+      std::string description;
+      getline(inventoryFile, type, ',');          //get type of inventory
+      inventoryFile.get();          //discard space
+      getline(inventoryFile, stringCount, ',');    //get count
+      int intCount = atoi(stringCount.c_str());
+      inventoryFile.get();          //discard space
+      getline(inventoryFile, description, '\n');    //get rest of info
+      Item *ptr = itemFactory.make_Item(type);
+      //insert this itemPtr to the BST inventoryTree
       inventoryTree.insert(ptr);
    }
+       
+         //if code doesnt exist in the hashtable skip over to the next line in file
+     // std::string description ;
+    //  Item *ptr1 = dynamic_cast<Item*>(FactoryHashtable.getValue("Code"));
+    //
+         
+    //
+  // }
 }
 void Store::FillCustomerData(Hashtable customerData, ifstream &customerFile){
       //read customerdata file until eof

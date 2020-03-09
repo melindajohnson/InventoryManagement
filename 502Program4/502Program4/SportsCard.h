@@ -27,7 +27,7 @@ public:
     //-------------------------- Parametric constructor  for class SportsCard  ------------------------------------//
     Create and new Item Object with deafault value where name = "n, year = y; grade = g, inventory = i
     */
-   SportsCard(std::string n, int y, std::string g,std::string m, int i );
+   SportsCard(int i ,std::string n, int y, std::string g,std::string m);
    
    /**
     //-------------------------- Destructor  for class SportsCard  ------------------------------------//
@@ -41,14 +41,9 @@ public:
     Postconditions:  boolean true if the left and right object are the same
     @return boolean true if same or false if not
     */
-   /**
-    //-------------------------- Parametric constructor  for class SportsCard  ------------------------------------//
-    Create and new Item Object with the description provided
-    */
-   SportsCard* create(std::string description);
    
    bool operator==(const Comparable& right) const;
-      // call itemClass operator== to make sure the two objects are SportsCard
+
    /**
     //-------------------------- Overloaded not equal to operator !=  ------------------------------------//
     Determines if two Item are equal based on  data members
@@ -57,7 +52,7 @@ public:
     @return boolean true if different or false if not
     */
    bool operator!=(const Comparable& right)const;
-      //negate operator==
+
    /**
     //-------------------------- Overloaded lesser than operator <------------------------------------//
     Determines if the item object on the left hand side is smaller than the Item object on right hand side based on name of the item
@@ -66,7 +61,7 @@ public:
     @return boolean true is left is smaller than right
     */
    bool operator<(const Comparable& right)const;
-      // call itemClass operator< and if that returns true then start comparing the data members and return bool based on "Sports cards are sorted by player, then by year, then by manufacturer, then by grade"
+     
    
    /**
     //-------------------------- Overloaded greater than operator >  ------------------------------------//
@@ -76,5 +71,11 @@ public:
     @return boolean true is left is larger than right
     */
    bool operator>(const Comparable& right)const;
-      //negate operator<
+
+   
+//   /**
+//    //-------------------------- Parametric constructor  for class SportsCard  ------------------------------------//
+//    Create and new Item Object with the description provided
+//    */
+//   SportsCard* create(std::string description);
 };

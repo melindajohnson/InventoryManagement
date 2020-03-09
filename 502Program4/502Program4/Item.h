@@ -37,7 +37,7 @@ public:
     //-------------------------- Parametric constructor  for class Item  ------------------------------------//
     Create and new Item Object with deafault value where name = n, year = y; grade = g
     */
-   Item(std::string n, int y, std::string g,int i);
+   Item(int i, std::string n, int y, std::string g);
    
    /**
     //-------------------------- Destructor  for class Item  ------------------------------------//
@@ -48,7 +48,7 @@ public:
     //-------------------------- Parametric constructor  for class item  ------------------------------------//
     Create and new Item Object with the description provided
     */
-   virtual Item* create(std::string description);
+   virtual Item* create(char itemCode);
    
    /**
     //-------------------------- Overloaded equal to operator ==  ------------------------------------//
@@ -58,16 +58,16 @@ public:
     @return boolean true if same or false if not
     */
    virtual bool operator==(const Comparable& right) const;
-   
+
    /**
     //-------------------------- Overloaded not equal to operator !=  ------------------------------------//
-    Determines if two Item are equal based on  data members 
+    Determines if two Item are equal based on  data members
     Preconditions: two item objects this and right
     Postconditions:  boolean false if the left and right object are the same
     @return boolean true if different or false if not
     */
    virtual bool operator!=(const Comparable& right)const;
-   
+
    /**
     //-------------------------- Overloaded lesser than operator <------------------------------------//
     Determines if the item object on the left hand side is smaller than the Item object on right hand side based on name of the item
@@ -76,7 +76,7 @@ public:
     @return boolean true is left is smaller than right
     */
    virtual bool operator<(const Comparable& right)const;
-   
+
    /**
     //-------------------------- Overloaded greater than operator >  ------------------------------------//
     Determines if the item object on the left hand side is larger than the Item object on right hand side based on name of the item

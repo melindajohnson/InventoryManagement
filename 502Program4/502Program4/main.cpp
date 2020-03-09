@@ -8,8 +8,9 @@ using namespace std;
 
 int main() {
    // open file
+   
    ifstream inventoryFile("hw4inventory.txt");
-   ifstream customerFile("hw4customers.txtt");
+   ifstream customerFile("hw4customers.txt");
    ifstream commandfile("hw4commands.txt");
    
    if (!inventoryFile) {

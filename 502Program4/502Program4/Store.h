@@ -20,12 +20,15 @@ Assumptions:
 
 #include <stdio.h>
 #include <fstream>
+#include <iostream>
+#include <string>
 #include "BinarySearchTree.h"
 #include "Hashtable.h"
 #include "Item.h"
-#include "Coin.h"
-#include "ComicBook.h"
-#include "SportsCard.h"
+#include "ItemFactory.h"
+//#include "Coin.h"
+//#include "ComicBook.h"
+//#include "SportsCard.h"
 #include "CustomerTransactions.h"
 #include "Customer.h"
 using namespace std;
