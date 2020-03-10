@@ -51,4 +51,8 @@ public:
   virtual void setData(std::string stringCount, std::string description);
    
    
+   /**
+    
+    */
+   virtual std::string toString()const override;
 };

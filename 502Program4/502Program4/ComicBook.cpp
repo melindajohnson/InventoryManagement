@@ -144,3 +144,7 @@ void ComicBook::setData(std::string stringCount, std::string description){
  std::ostream& operator<<(std::ostream& out, const ComicBook& book){
     return out;
 }
+
+std::string ComicBook::toString() const {
+   return  Item::toString() + ", " + publisher;
+}

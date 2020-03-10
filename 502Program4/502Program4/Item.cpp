@@ -25,5 +25,11 @@ Item:: ~Item(){
  sets the data members of an  Item Object with the parameters provided
  */
 void Item::setData(std::string stringCount, std::string description){
-   //
+      //
+   
+}
+std::string Item::toString()const{
+   std::string in= std::to_string(inventory);
+   return in + ", " + year + ", " + grade + ", " + name;
+   
 }

@@ -44,10 +44,11 @@ private:
    };
    
    BSTNode* rootPtr; //pointer to the root Node of the SearchTree
-   int totalCharacters;  //total numbers of Nodes in the SearchTree
+   int totalCharacters = 0;  //total numbers of Nodes in the SearchTree
    
 public:
    
+   int isEmpty();
    /*
     //-------------------------- Default constructor for class Search Tree ------------------------------------//
     Preconditions: None

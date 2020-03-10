@@ -96,4 +96,9 @@ public:
     *  @return The output stream that was passed in
     */
    friend std::ostream& operator<<(std::ostream& out, const ComicBook& book);
+   
+   /**
+    
+    */
+   virtual std::string toString()const override;
 };

@@ -25,7 +25,9 @@
 
 
 #include "BinarySearchTree.h"
-
+int BinarySearchTree::isEmpty(){
+   return (totalCharacters==0);
+}
 
 /*
  //-------------------------- Default constructor for class BinarySearchTree ------------------------------------//
@@ -368,7 +370,7 @@ void BinarySearchTree::inorderTraversal(std::ostream& output, const BSTNode* sub
    {
       inorderTraversal(output,subTreePtr->left);
    }
-   //output << *subTreePtr->item;
+   output << *subTreePtr->item;
    output << " ";
    //output << subTreePtr->count;
    output << std::endl;

@@ -21,20 +21,20 @@
 Store::Store(){
    std::cout << "out";
 }
-void Store::processDataFiles(Hashtable customerData, ifstream &inventoryFile, ifstream &customerFile, ifstream &commandfile){
+void Store::processDataFiles(Hashtable& customerData, ifstream &inventoryFile, ifstream &customerFile, ifstream &commandfile){
    FillInventory(inventoryFile);
-   FillCustomerData(customerData, customerFile);
-   ProcessTransactions(customerData, commandfile);
+  // FillCustomerData(customerData, customerFile);
+  // ProcessTransactions(customerData, commandfile);
 }
 void Store::FillInventory(ifstream &inventoryFile){
-      
+   Hashtable treeHash;
    itemManager.buildItemsByFactory(inventoryFile, treeHash);
-       
+   display(treeHash);
          //if code is invalid skip over to the next line in file
          //create new tree for new code and then insert item else just insert item
    
 }
-void Store::FillCustomerData(Hashtable customerData, ifstream &customerFile){
+void Store::FillCustomerData(Hashtable& customerData, ifstream &customerFile){
       //read customerdata file until eof
    for(;;){
          //read customer id and customer name
@@ -44,12 +44,12 @@ void Store::FillCustomerData(Hashtable customerData, ifstream &customerFile){
       getline(customerFile, id, ',');          //get customer id
       customerFile.get();          //discard space
       getline(customerFile, name);    //get customer name
-     // int customerID = atoi(id.c_str());
-      Customer *c1 = new Customer();
-    //  customerData.insert(1, c1);
+//      int customerID = atoi(id.c_str());
+//      Customer *c1 = new Customer();
+//      customerData.insert(customerID, c1);
    }
 }
-void Store::ProcessTransactions(Hashtable customerData, ifstream &commandfile){
+void Store::ProcessTransactions(Hashtable& customerData, ifstream &commandfile){
       //read command file until eof
    for(;;){
          
@@ -82,4 +82,13 @@ void Store::ProcessTransactions(Hashtable customerData, ifstream &commandfile){
    }
 }
 
-
+void Store::display(Hashtable& h1){
+   for(int i= 0;i< 26; i++){
+      BinarySearchTree *tree = dynamic_cast<BinarySearchTree*>(h1.getValue(i));
+      if(tree != NULL){
+        std::cout << "array position [" <<  i  <<  "]" ;
+         std::cout << endl;
+         std::cout << *tree;
+      }
+   }
+}

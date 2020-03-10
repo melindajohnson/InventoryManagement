@@ -132,3 +132,9 @@ std::istream& operator>>(std::istream& in, Coin& coin){
 std::ostream& operator<<(std::ostream& out, const Coin& coin){
    return out;
 }
+
+
+std::string Coin::toString() const {
+   
+   return Item::toString();
+}

@@ -144,3 +144,7 @@ std::istream& operator>>(std::istream& in, SportsCard& card){
 std::ostream& operator<<(std::ostream& out, const SportsCard& card){
    return out;
 }
+std::string SportsCard::toString() const {
+   
+   return  Item::toString() + ", " + manufacturer;
+}

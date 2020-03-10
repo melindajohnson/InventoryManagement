@@ -7,7 +7,10 @@
  Postconditions: The Hashtable is created with table size of buckets
  */
 Hashtable::Hashtable(){
-   table = new HashNode*[totalBuckets]();
+   table = new HashNode* [totalBuckets];
+   for (int i = 0; i< 101; i++) {
+      table[i] = nullptr;
+   }
 }
 /**
  //-------------------------- Parametric  construtcor ------------------------------------//
@@ -15,8 +18,10 @@ Hashtable::Hashtable(){
  Postconditions: The Hashtable is created with table size of buckets
  */
 Hashtable::Hashtable(int buckets){
- //  totalBuckets = buckets;
-   table = new HashNode*[buckets]();
+   table = new HashNode* [buckets];
+//   for (int i = 0; i< buckets; i++) {
+//      table[i] = nullptr;
+//   }
 }
 /**
  //-------------------------- Destructor  for class Hashtable  ------------------------------------//
@@ -66,12 +71,12 @@ void Hashtable::remove(int k){
    int hashIndex = getHashIndex(k);
    HashNode *prev = NULL;
    HashNode *entry = table[hashIndex];
-   
+
    while (entry != NULL && entry->key != k) {
       prev = entry;
       entry = entry->next;
    }
-   
+
    if (entry == NULL) {
          // key not found
       return;
@@ -102,7 +107,7 @@ bool Hashtable::containsKey(int key){
          return true;
       }
    }
-   return false;
+  return false;
 }
 /**
  //-------------------------- getValue ------------------------------------//
@@ -119,7 +124,7 @@ HashValueType* Hashtable::getValue(int k){
       }
       entry = entry->next;
    }
-   return nullptr;
+  return nullptr;
 }
 /**
  //-------------------------- isEmpty ------------------------------------//
@@ -152,6 +157,6 @@ void Hashtable::clear(){
       }
       table[i] = NULL;
    }
-   // destroy the hash table
-   //delete [] table;
+  //  destroy the hash table
+  delete [] table;
 }

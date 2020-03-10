@@ -13,10 +13,10 @@
 #pragma once
 #include <stdio.h>
 #include <string>
-#include <list>
+#include <vector>
 #include <iterator>
 #include "HashValueType.h"
-
+static const int totalBuckets = 101;
 class Hashtable{
 private:
    struct HashNode
@@ -26,9 +26,8 @@ private:
       HashNode* next;
    };
    
-   static const int totalBuckets = 101;
-   int **arr = new int * [totalBuckets];
-   HashNode **table = new HashNode * [totalBuckets];
+   
+   HashNode **table;
    int numberOfentries = 0;
    
    /**

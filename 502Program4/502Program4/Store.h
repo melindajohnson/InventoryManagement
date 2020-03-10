@@ -25,19 +25,20 @@ Assumptions:
 #include <vector>
 #include "ItemManager.h"
 #include "BinarySearchTree.h"
-#include "Hashtable.h"
+
 #include "Item.h"
 #include "ItemFactory.h"
 #include "CustomerTransactions.h"
 #include "Customer.h"
 using namespace std;
+#define CHAR_SIZE 26
 
 class Store{
 private:
   // std::vector<BinarySearchTree> inventoryTree; // BinarySearchTree whose nodes point to items
    BinarySearchTree transactionTree; // BinarySearchTree whose nodes point to customerTransactions
    Hashtable inventoryHashtable; //Hashtable for quick retrival
-   Hashtable treeHash; //Hashtable for inserting into respective item tree
+   //Hashtable treeHash(CHAR_SIZE); //Hashtable for inserting into respective item tree
    ItemManager itemManager;
    
    /**
@@ -51,13 +52,15 @@ private:
     Preconditions: A store object is created
     Postconditions: The customerData hashtable is filled with customer information
     */
-   void FillCustomerData(Hashtable customerData, ifstream &customerFile);
+   void FillCustomerData(Hashtable& customerData, ifstream &customerFile);
    /**
     //-------------------------- ProcessTransactions------------------------------------//
     Preconditions: A store object is created and inventorytree and customerData is filled with data
     Postconditions: The rootPtr of the Searchtree is initialized to a nullptr
     */
-   void ProcessTransactions(Hashtable customerData, ifstream &commandfile);
+   void ProcessTransactions(Hashtable& customerData, ifstream &commandfile);
+   
+   
    
 public:
    
@@ -67,7 +70,8 @@ public:
     Preconditions: A store object is created and a hashtable object is created
     Postconditions: The inventory tree,inventoryHashtable, customerData Hashtable and transactionTree are all filled with data
     */
-   void processDataFiles(Hashtable customerData, ifstream &inventoryFile, ifstream &customerFile, ifstream &commandfile);
+   void processDataFiles(Hashtable& customerData, ifstream &inventoryFile, ifstream &customerFile, ifstream &commandfile);
    
+   void display(Hashtable& h1);
 };
 

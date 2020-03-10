@@ -6,11 +6,11 @@
 #include "Coin.h"
 #include "ComicBook.h"
 #include "SportsCard.h"
+const static unsigned int numberOfItems = 26;
 
 class ItemFactory
 {
 private:
-   const static unsigned int numberOfItems = 26;
    Item* itemFactory[numberOfItems];
    int hash(char ch) const;
 

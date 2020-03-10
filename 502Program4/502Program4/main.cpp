@@ -3,7 +3,7 @@
 #include <string>
 #include <fstream>
 #include "Store.h"
-#include "Hashtable.h"
+
 using namespace std;
 
 int main() {
@@ -28,7 +28,7 @@ int main() {
    
    std::cout << "IN";
    Store s1; //create a store object
-   Hashtable customerData; //create a hashtable object for filling with customer data
+   Hashtable customerData(26); //create a hashtable object for filling with customer data
    
    //process data files in store 1
    s1.processDataFiles(customerData, inventoryFile, customerFile, commandfile);

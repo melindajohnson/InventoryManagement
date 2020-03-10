@@ -59,4 +59,16 @@ public:
     */
    virtual ~Comparable();
    
+   /**
+    //--------------------------Overloaded output operator <<  ------------------------------------//
+    Preconditions: A comparable object is created and its data is set
+    Postconditions: Outputs the Comparable objects
+    */
+   friend std::ostream& operator<<(std::ostream& out, const Comparable& obj1);
+   
+   /**
+    
+    */
+   virtual std::string toString()const= 0;
 };
+
