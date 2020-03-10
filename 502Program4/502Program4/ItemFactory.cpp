@@ -7,19 +7,20 @@ int ItemFactory::hash(char ch) const{
 }
 
 ItemFactory::ItemFactory() {
-//   itemFactory[12] = new AObject;
-//   objFactory[1] = new BObject;
-//   objFactory[2] = new CObject;
-//   objFactory[3] = new DObject;
-//   objFactory[4] = new EObject;
-//   for (int i = 5; i < 10; i++) objFactory[i] = NULL;
+ for (int i = 0; i < numberOfItems; i++) {
+      if(i==2) itemFactory[2] = new ComicBook;
+      else if(i==12) itemFactory[12] = new Coin;
+      else if(i==18) itemFactory[18] = new SportsCard;
+      else itemFactory[i] = NULL;
+ }
 }
 
  ItemFactory:: ~ItemFactory() {
-   for (int i = 0; i < 5; i++) {
+   for (int i = 0; i < numberOfItems; i++) {
       delete itemFactory[i];
       itemFactory[i] = NULL;
    }
+   
 }
 
 Item* ItemFactory::make_Item(char ch) const {

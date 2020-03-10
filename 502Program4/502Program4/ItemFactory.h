@@ -10,7 +10,8 @@
 class ItemFactory
 {
 private:
-   Item* itemFactory[25]; // in general, do not hard code numbers, room to grow
+   const static unsigned int numberOfItems = 26;
+   Item* itemFactory[numberOfItems];
    int hash(char ch) const;
 
 public:
