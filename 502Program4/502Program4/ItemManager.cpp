@@ -26,7 +26,6 @@ void ItemManager::buildItemsByFactory(std::ifstream &inventoryFile, Hashtable &t
          int key = code - 'A';
          if(treeHash.containsKey(key)){
             BinarySearchTree *tree = dynamic_cast<BinarySearchTree*>(treeHash.getValue(key));
-            treeHash.insert(key, tree);
             tree->insert(ptr);
          }else{
             BinarySearchTree *tree = new BinarySearchTree;

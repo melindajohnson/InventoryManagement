@@ -60,6 +60,8 @@ private:
    void ProcessTransactions(Hashtable customerData, ifstream &commandfile);
    
 public:
+   
+   Store();
    /**
     //-------------------------- processDataFiles ------------------------------------//
     Preconditions: A store object is created and a hashtable object is created

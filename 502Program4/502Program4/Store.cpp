@@ -18,6 +18,9 @@
  */
 #include "Store.h"
 
+Store::Store(){
+   std::cout << "out";
+}
 void Store::processDataFiles(Hashtable customerData, ifstream &inventoryFile, ifstream &customerFile, ifstream &commandfile){
    FillInventory(inventoryFile);
    FillCustomerData(customerData, customerFile);
@@ -25,7 +28,6 @@ void Store::processDataFiles(Hashtable customerData, ifstream &inventoryFile, if
 }
 void Store::FillInventory(ifstream &inventoryFile){
       
-  // ItemFactory itemFactory;
    itemManager.buildItemsByFactory(inventoryFile, treeHash);
        
          //if code is invalid skip over to the next line in file

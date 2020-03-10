@@ -27,8 +27,9 @@ private:
    };
    
    static const int totalBuckets = 101;
-   HashNode** table;
-   int numberOfentries;
+   int **arr = new int * [totalBuckets];
+   HashNode **table = new HashNode * [totalBuckets];
+   int numberOfentries = 0;
    
    /**
     //-------------------------- keyToHash ------------------------------------//

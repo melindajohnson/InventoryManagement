@@ -26,6 +26,7 @@ int main() {
       return 1;
    }
    
+   std::cout << "IN";
    Store s1; //create a store object
    Hashtable customerData; //create a hashtable object for filling with customer data
    

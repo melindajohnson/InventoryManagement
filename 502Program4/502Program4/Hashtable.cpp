@@ -35,7 +35,7 @@ void Hashtable::insert(int k, HashValueType* v){
    int hashIndex = getHashIndex(k);
    HashNode *prev = NULL;
    HashNode *entry = table[hashIndex];
-   while (entry != NULL && entry->key != k) {
+   while (entry != NULL) {   //&& entry->key != k
       prev = entry;
       entry = entry->next;
    }
@@ -43,12 +43,14 @@ void Hashtable::insert(int k, HashValueType* v){
       entry = new HashNode;
       entry->key = k;
       entry->value = v;
+      entry->next =nullptr;
       if (prev == NULL) {
          // insert as first bucket
          table[hashIndex] = entry;
          numberOfentries++;
       } else {
          prev->next = entry;
+          numberOfentries++;
       }
    } else {
          // just update the value
