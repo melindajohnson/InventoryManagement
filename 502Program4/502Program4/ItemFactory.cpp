@@ -7,25 +7,19 @@ int ItemFactory::hash(char ch) const{
 }
 
 ItemFactory::ItemFactory() {
- for (int i = 0; i < numberOfItems; i++) {
-      if(i==2) itemFactory[2] = new ComicBook;
-      else if(i==12) itemFactory[12] = new Coin;
-      else if(i==18) itemFactory[18] = new SportsCard;
-      else itemFactory[i] = NULL;
- }
+    itemsHash->insert("C", new ComicBook);
+    itemsHash->insert("M", new Coin);
+    itemsHash->insert("S", new SportsCard);
 }
 
  ItemFactory:: ~ItemFactory() {
-   for (int i = 0; i < numberOfItems; i++) {
-      delete itemFactory[i];
-      itemFactory[i] = NULL;
-   }
-   
+       itemsHash->clear();
 }
 
-Item* ItemFactory::make_Item(char ch) const {
-   int subscript = hash(ch);             // would do error checking
-   if(itemFactory[subscript] != nullptr){
-   return itemFactory[subscript]->create();
-   } else return nullptr;
+Item* ItemFactory::make_Item(std::string code) const {
+   if(itemsHash->containsKey(code)){
+      Item* ptr = dynamic_cast<Item*>(itemsHash->getValue(code));
+      return ptr->create();
+   }
+   else return nullptr;
 }

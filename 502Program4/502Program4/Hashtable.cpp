@@ -6,22 +6,23 @@
  Preconditions: None
  Postconditions: The Hashtable is created with table size of buckets
  */
-Hashtable::Hashtable(){
-   table = new HashNode* [totalBuckets];
-   for (int i = 0; i< 101; i++) {
-      table[i] = nullptr;
-   }
-}
+//Hashtable::Hashtable(){
+//   table = new HashNode* [totalBuckets];
+//   for (int i = 0; i< 101; i++) {
+//      table[i] = nullptr;
+//   }
+//}
 /**
  //-------------------------- Parametric  construtcor ------------------------------------//
  Preconditions: None
  Postconditions: The Hashtable is created with table size of buckets
  */
-Hashtable::Hashtable(int buckets){
+Hashtable::Hashtable(const int buckets){
+   totalBuckets = buckets;
    table = new HashNode* [buckets];
-//   for (int i = 0; i< buckets; i++) {
-//      table[i] = nullptr;
-//   }
+   for (int i = 0; i< buckets; i++) {
+      table[i] = nullptr;
+   }
 }
 /**
  //-------------------------- Destructor  for class Hashtable  ------------------------------------//
@@ -36,7 +37,7 @@ Hashtable::~Hashtable(){
  Preconditions: The Hashtable is created
  Postconditions: The Hashtable has a new Hashentry
  */
-void Hashtable::insert(int k, HashValueType* v){
+void Hashtable::insert(std::string k, HashValueType* v){
    int hashIndex = getHashIndex(k);
    HashNode *prev = NULL;
    HashNode *entry = table[hashIndex];
@@ -67,7 +68,7 @@ void Hashtable::insert(int k, HashValueType* v){
  Preconditions: The Hashtable is created and filled HashEntries
  Postconditions: a  Hashentry is removed based on the key k
  */
-void Hashtable::remove(int k){
+void Hashtable::remove(std::string k){
    int hashIndex = getHashIndex(k);
    HashNode *prev = NULL;
    HashNode *entry = table[hashIndex];
@@ -99,7 +100,7 @@ void Hashtable::remove(int k){
  Postconditions: a boolean true if the key exists and false is not
  @return a boolean true if the key exists and false is not
  */
-bool Hashtable::containsKey(int key){
+bool Hashtable::containsKey(std::string key) const{
    int hashIndex = getHashIndex(key);
    HashNode *entry = table[hashIndex];
    while (entry != NULL) {
@@ -115,7 +116,7 @@ bool Hashtable::containsKey(int key){
  Postconditions: HashValueType* from the Hashtable depending upon the key k
  @return HashValueType* from the Hashtable
  */
-HashValueType* Hashtable::getValue(int k){
+HashValueType* Hashtable::getValue(std::string k) const{
    int hashIndex = getHashIndex(k);
    HashNode *entry = table[hashIndex];
    while (entry != NULL) {
@@ -132,14 +133,25 @@ HashValueType* Hashtable::getValue(int k){
  Postconditions: boolean true if Hashtable has no entries and false if not
  @return boolean true if Hashtable has no entries and false if not
  */
-bool Hashtable::isEmpty(){
+bool Hashtable::isEmpty() const{
    return totalBuckets==0;
 }
 
 
-int Hashtable::getHashIndex(int k){
- //  int intCount = atoi(k.c_str());
-   return k % totalBuckets;
+int Hashtable::getHashIndex(std::string k) const{
+//  int intCount = atoi(k.c_str());
+//   return intCount % totalBuckets;
+   int hashVal = 0;
+   
+   for(int i = 0; i<k.length();  i++)
+      hashVal = 37*hashVal+k[i];
+   
+   hashVal %= totalBuckets;
+   
+   if(hashVal<0)
+      hashVal += totalBuckets;
+   
+   return hashVal;
 }
 
 /**
@@ -159,4 +171,22 @@ void Hashtable::clear(){
    }
   //  destroy the hash table
   delete [] table;
+}
+
+
+int Hashtable::size() const{
+   return totalBuckets;
+}
+
+
+std::vector<HashValueType*> Hashtable::getContents() const{
+   std::vector<HashValueType*> contents;
+   for(int i=0; i< totalBuckets; i++){
+      HashNode *curr = table[i];
+      while(curr != nullptr){
+      contents.push_back(table[i]->value);
+      curr = curr->next;
+      }
+   }
+   return contents;
 }

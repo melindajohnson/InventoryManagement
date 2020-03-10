@@ -31,14 +31,14 @@ Assumptions:
 #include "CustomerTransactions.h"
 #include "Customer.h"
 using namespace std;
-#define CHAR_SIZE 26
+const static int totalBuckets = 26;
 
 class Store{
 private:
-  // std::vector<BinarySearchTree> inventoryTree; // BinarySearchTree whose nodes point to items
+ 
    BinarySearchTree transactionTree; // BinarySearchTree whose nodes point to customerTransactions
-   Hashtable inventoryHashtable; //Hashtable for quick retrival
-   //Hashtable treeHash(CHAR_SIZE); //Hashtable for inserting into respective item tree
+   //Hashtable inventoryHashtable = new Hashtable(totalBuckets); //Hashtable for quick retrival
+   Hashtable *treeHash = new Hashtable(totalBuckets); //Hashtable for inserting into respective item tree
    ItemManager itemManager;
    
    /**

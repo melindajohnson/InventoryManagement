@@ -16,18 +16,19 @@
 #include <vector>
 #include <iterator>
 #include "HashValueType.h"
-static const int totalBuckets = 101;
+
 class Hashtable{
 private:
    struct HashNode
    {
       HashValueType* value;
-      int key;
+      std::string key;
       HashNode* next;
    };
    
    
    HashNode **table;
+   int totalBuckets = 0;
    int numberOfentries = 0;
    
    /**
@@ -36,28 +37,22 @@ private:
     Postconditions: The parametric Key is hashed
     @return hashcode of type integer
     */
-   int keyToHash(const int key);
+   int keyToHash(const std::string);
    
-   /**
-    //-------------------------- clear ------------------------------------//
-    Preconditions: The Hashtable is created and filled HashEntries
-    Postconditions: The Hashentries inside the hashable are all deallocated and deleted
-    */
-   void clear();
-   
+  
 public:
    /**
     //-------------------------- Default construtcor ------------------------------------//
     Preconditions: None
     Postconditions: The Hashtable is created with table size of buckets
     */
-   Hashtable();
+   //Hashtable();
    /**
     //-------------------------- Parametric  construtcor ------------------------------------//
     Preconditions: None
     Postconditions: The Hashtable is created with table size of buckets
     */
-   Hashtable(int buckets);
+   Hashtable(const int buckets);
    /**
     //-------------------------- Destructor  for class Hashtable  ------------------------------------//
     Destroys object and frees memory allocated by object.
@@ -69,13 +64,13 @@ public:
     Preconditions: The Hashtable is created
     Postconditions: The Hashtable has a new Hashentry
     */
-   void insert(int k, HashValueType* v);
+   void insert(std::string k, HashValueType* v);
    /**
     //-------------------------- remove method ------------------------------------//
     Preconditions: The Hashtable is created and filled HashEntries
     Postconditions: a  Hashentry is removed based on the key k
     */
-   void remove(int k);
+   void remove(std::string k);
    
    /**
     //-------------------------- containsKey ------------------------------------//
@@ -83,23 +78,34 @@ public:
     Postconditions: a boolean true if the key exists and false is not
     @return a boolean true if the key exists and false is not
     */
-   bool containsKey(int key);
+   bool containsKey(std::string key) const;
    /**
     //-------------------------- getValue ------------------------------------//
     Preconditions: The Hashtable is created and filled HashEntries
     Postconditions: HashValueType* from the Hashtable depending upon the key k
     @return HashValueType* from the Hashtable
     */
-   HashValueType* getValue(int k);
+   HashValueType* getValue(std::string k) const;
    /**
     //-------------------------- isEmpty ------------------------------------//
     Preconditions:The Hashtable is created and filled HashEntries
     Postconditions: boolean true if Hashtable has no entries and false if not
     @return boolean true if Hashtable has no entries and false if not
     */
-   bool isEmpty();
+   bool isEmpty() const;
    
-   int getHashIndex(int k);
+   int size() const;
+   
+   int getHashIndex(std::string k) const;
+   
+   /**
+    //-------------------------- clear ------------------------------------//
+    Preconditions: The Hashtable is created and filled HashEntries
+    Postconditions: The Hashentries inside the hashable are all deallocated and deleted
+    */
+   void clear();
+   
+   std::vector<HashValueType*> getContents() const;
 };
 
 

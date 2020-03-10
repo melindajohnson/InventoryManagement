@@ -6,16 +6,17 @@
 #include "Coin.h"
 #include "ComicBook.h"
 #include "SportsCard.h"
-const static unsigned int numberOfItems = 26;
+#include "Hashtable.h"
+const static int numberOfItems = 26;
 
 class ItemFactory
 {
 private:
-   Item* itemFactory[numberOfItems];
+   Hashtable *itemsHash = new Hashtable(numberOfItems);
    int hash(char ch) const;
 
 public:
    ItemFactory();
    virtual ~ItemFactory();
-   Item* make_Item(char ch) const;
+   Item* make_Item(std::string code) const;
 };
