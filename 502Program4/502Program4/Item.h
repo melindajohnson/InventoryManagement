@@ -22,7 +22,7 @@ protected:
    
    int inventory;
    std::string name;
-   int year;
+   std::string year;
    std::string  grade;
    
    
@@ -34,12 +34,6 @@ public:
    Item();
    
    /**
-    //-------------------------- Parametric constructor  for class Item  ------------------------------------//
-    Create and new Item Object with deafault value where name = n, year = y; grade = g
-    */
-   Item(int i, std::string n, int y, std::string g);
-   
-   /**
     //-------------------------- Destructor  for class Item  ------------------------------------//
     Destroys object and frees memory allocated by object.
     */
@@ -48,42 +42,13 @@ public:
     //-------------------------- Parametric constructor  for class item  ------------------------------------//
     Create and new Item Object with the description provided
     */
-   virtual Item* create(char itemCode);
+   virtual Item* create() const = 0;
    
    /**
-    //-------------------------- Overloaded equal to operator ==  ------------------------------------//
-    Determines if two Item are equal based on  data members
-    Preconditions: two item objects this and right
-    Postconditions:  boolean true if the left and right object are the same
-    @return boolean true if same or false if not
+    //-------------------------- Method to set data  ------------------------------------//
+    sets the data members of an  Item Object with the parameters provided
     */
-   virtual bool operator==(const Comparable& right) const;
-
-   /**
-    //-------------------------- Overloaded not equal to operator !=  ------------------------------------//
-    Determines if two Item are equal based on  data members
-    Preconditions: two item objects this and right
-    Postconditions:  boolean false if the left and right object are the same
-    @return boolean true if different or false if not
-    */
-   virtual bool operator!=(const Comparable& right)const;
-
-   /**
-    //-------------------------- Overloaded lesser than operator <------------------------------------//
-    Determines if the item object on the left hand side is smaller than the Item object on right hand side based on name of the item
-    Preconditions: two item objects this and right
-    Postconditions: boolean true if the left hand side data is smaller than the data on the right hand side
-    @return boolean true is left is smaller than right
-    */
-   virtual bool operator<(const Comparable& right)const;
-
-   /**
-    //-------------------------- Overloaded greater than operator >  ------------------------------------//
-    Determines if the item object on the left hand side is larger than the Item object on right hand side based on name of the item
-    Preconditions: two item objects this and right
-    Postconditions: boolean true if the left hand side data is larger than the data on the right hand side
-    @return boolean true is left is larger than right
-    */
-   virtual bool operator>(const Comparable& right)const;
+  // virtual void setData(std::string stringCount, std::string description) const = 0;
+   
    
 };

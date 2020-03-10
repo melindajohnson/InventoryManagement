@@ -9,14 +9,6 @@ SportsCard::SportsCard():Item(){
 }
 
 /**
- //-------------------------- Parametric constructor  for class SportsCard  ------------------------------------//
- Create and new Item Object with deafault value where name = "n, year = y; grade = g, inventory = i
- */
-SportsCard::SportsCard(int i, std::string n, int y, std::string g,std::string m ):Item(i, n, y, g){
-   manufacturer = m;
-}
-
-/**
  //-------------------------- Destructor  for class SportsCard  ------------------------------------//
  Destroys object and frees memory allocated by object.
  */
@@ -97,12 +89,58 @@ bool SportsCard::operator>(const Comparable& right)const{
    return false;
 }
 
-///**
-// //-------------------------- Parametric constructor  for class SportsCard  ------------------------------------//
-// Create and new Item Object with the description provided
-// */
-//SportsCard* SportsCard::create(std::string description){
-//      //split description into data members and set them in new coin
-//   SportsCard *c = new SportsCard;
-//   return c;
+/**
+ //-------------------------- Parametric constructor  for class Coin  ------------------------------------//
+ Create and new Item Object with the description provided
+ */
+Item* SportsCard::create() const {
+   return new SportsCard();
+   
+}
+
+/**
+ //-------------------------- Method to set data  ------------------------------------//
+ sets the data members of an  Item Object with the parameters provided
+ */
+//void SportsCard::setData(std::string stringCount, std::string description){
+//   inventory = atoi(stringCount.c_str());
+//   std::string tokens[4];
+//   int i = 0;
+//   std::stringstream  data(description);
+//   std::string line;
+//   while(std::getline(data,line,','))
+//   {
+//      tokens[i] = line;
+//      i++;
+//      data.get();
+//   }
+//   year = tokens[0];
+//   grade = tokens[1];
+//   name = tokens[2];
+//   manufacturer = tokens[3];
+//   
 //}
+
+/**
+ *  Initialize an instance of this class from an input stream.
+ *  Expected format is: {quantity},{year},{grade},{player},{manufacturer}
+ *  e.g. "9, 1989, Near Mint, Ken Griffey Jr., Upper Deck"
+ *  @param in An input stream to read `Card` data from.
+ *  @param card A reference to a `Card` to initialize.
+ *  @return The input stream that was passed in.
+ */
+std::istream& operator>>(std::istream& in, SportsCard& card){
+   return in;
+}
+/**
+ *  Output a textual representation of this instance to the output stream.
+ *  @pre This instance must be initialized.
+ *  @post A textual representation of this instance is appended to
+ *   output stream.
+ *  @param out An output stream to append to.
+ *  @param card A card instance to append to the output stream.
+ *  @return The output stream that was passed in
+ */
+std::ostream& operator<<(std::ostream& out, const SportsCard& card){
+   return out;
+}

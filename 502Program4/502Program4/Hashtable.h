@@ -19,14 +19,15 @@
 
 class Hashtable{
 private:
-   struct HashEntry
+   struct HashNode
    {
-      std::list<HashValueType*> value;
+      HashValueType* value;
       std::string key;
+      HashNode* next;
    };
    
-   static const int totalBuckets = 101;
-   HashEntry* table = new HashEntry[totalBuckets];
+   const static int totalBuckets = 101;
+   HashNode *table[totalBuckets];
    
    /**
     //-------------------------- keyToHash ------------------------------------//
@@ -50,12 +51,12 @@ public:
     Postconditions: The Hashtable is created with table size of buckets
     */
    Hashtable();
-   /**
-    //-------------------------- Parametric  construtcor ------------------------------------//
-    Preconditions: None
-    Postconditions: The Hashtable is created with table size of buckets
-    */
-   Hashtable(int buckets);
+//   /**
+//    //-------------------------- Parametric  construtcor ------------------------------------//
+//    Preconditions: None
+//    Postconditions: The Hashtable is created with table size of buckets
+//    */
+//   Hashtable(int buckets);
    /**
     //-------------------------- Destructor  for class Hashtable  ------------------------------------//
     Destroys object and frees memory allocated by object.
@@ -74,13 +75,7 @@ public:
     Postconditions: a  Hashentry is removed based on the key k
     */
    void remove(std::string k);
-   /**
-    //-------------------------- containsValue ------------------------------------//
-    Preconditions:The Hashtable is created and filled HashEntries
-    Postconditions: a boolean true if the value exists and false is not
-    @return a boolean true if the value exists and false is not
-    */
-   bool containsValue(HashValueType* v);
+   
    /**
     //-------------------------- containsKey ------------------------------------//
     Preconditions: The Hashtable is created and filled HashEntries
@@ -103,6 +98,7 @@ public:
     */
    bool isEmpty();
    
+   int getHashIndex(std::string k);
 };
 
 

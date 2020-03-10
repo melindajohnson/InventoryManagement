@@ -22,13 +22,11 @@ Assumptions:
 #include <fstream>
 #include <iostream>
 #include <string>
+#include "ItemManager.h"
 #include "BinarySearchTree.h"
 #include "Hashtable.h"
 #include "Item.h"
 #include "ItemFactory.h"
-//#include "Coin.h"
-//#include "ComicBook.h"
-//#include "SportsCard.h"
 #include "CustomerTransactions.h"
 #include "Customer.h"
 using namespace std;
@@ -38,6 +36,7 @@ private:
    BinarySearchTree inventoryTree; // BinarySearchTree whose nodes point to items
    BinarySearchTree transactionTree; // BinarySearchTree whose nodes point to customerTransactions
    Hashtable inventoryHashtable; //Hashtable for quick retrival
+   ItemManager itemManager;
    
    /**
     //-------------------------- FillInventory ------------------------------------//

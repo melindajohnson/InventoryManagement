@@ -24,51 +24,27 @@ void Store::processDataFiles(Hashtable customerData, ifstream &inventoryFile, if
    ProcessTransactions(customerData, commandfile);
 }
 void Store::FillInventory(ifstream &inventoryFile){
-      //create a factory hashtable
-   Hashtable FactoryHashtable(3);
-   ItemFactory itemFactory;
-   
-      //create dummy pointer to derived classes
-//   Coin *dummyCoin = new Coin();
-//   ComicBook *dummycomic = new ComicBook();
-//   SportsCard *dummySportsCard = new SportsCard();
-//      //insert data in factory hashtable
-//   FactoryHashtable.insert("M", dummyCoin);
-//   FactoryHashtable.insert("C", dummycomic);
-//   FactoryHashtable.insert("S", dummySportsCard);
-      //read inventory file until eof
-   for(;;){
-      if (inventoryFile.eof()) break;
-      std::string type;
-      std::string stringCount;
-      std::string description;
-      getline(inventoryFile, type, ',');          //get type of inventory
-      inventoryFile.get();          //discard space
-      getline(inventoryFile, stringCount, ',');    //get count
-      int intCount = atoi(stringCount.c_str());
-      inventoryFile.get();          //discard space
-      getline(inventoryFile, description, '\n');    //get rest of info
-      Item *ptr = itemFactory.make_Item(type);
-      //insert this itemPtr to the BST inventoryTree
-      inventoryTree.insert(ptr);
-   }
+      
+  // ItemFactory itemFactory;
+   itemManager.buildItemsByFactory(inventoryFile);
        
-         //if code doesnt exist in the hashtable skip over to the next line in file
-     // std::string description ;
-    //  Item *ptr1 = dynamic_cast<Item*>(FactoryHashtable.getValue("Code"));
-    //
-         
-    //
-  // }
+         //if code is invalid skip over to the next line in file
+         //create new tree for new code and then insert item else just insert item
+   
 }
 void Store::FillCustomerData(Hashtable customerData, ifstream &customerFile){
       //read customerdata file until eof
    for(;;){
          //read customer id and customer name
-         //in case of error in input skip over to the next line in file
-      std::string customerID = " read customer id from file ";
-      Customer *c1 = new Customer(); //read customer name and create new Customer Object
-      customerData.insert(customerID, c1);
+      if (customerFile.eof()) break;
+      std::string id;
+      std::string name;
+      getline(customerFile, id, ',');          //get customer id
+      customerFile.get();          //discard space
+      getline(customerFile, name);    //get customer name
+     // int customerID = atoi(id.c_str());
+      Customer *c1 = new Customer();
+      customerData.insert(id, c1);
    }
 }
 void Store::ProcessTransactions(Hashtable customerData, ifstream &commandfile){

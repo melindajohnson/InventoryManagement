@@ -15,19 +15,13 @@
 #include "Item.h"
 class ComicBook : public Item{
 private:
-   std::string title;
+   std::string publisher;
 public:
    /**
     //-------------------------- Default constructor  for class ComicBook  ------------------------------------//
     Create and new ComicBook Object by calling Item constructor
     */
    ComicBook();
-   
-   /**
-    //-------------------------- Parametric constructor  for class ComicBook  ------------------------------------//
-    Create and new Item Object with deafault value where name = "n, year = y; grade = g, inventory = i
-    */
-   ComicBook(int i, std::string n, int y, std::string g,std::string t);
    
    /**
     //-------------------------- Destructor  for class ComicBook  ------------------------------------//
@@ -42,7 +36,7 @@ public:
     Postconditions:  boolean true if the left and right object are the same
     @return boolean true if same or false if not
     */
-   bool operator==(const Comparable& right) const;
+   bool operator==(const Comparable& right) const override; ;
    /**
     //-------------------------- Overloaded not equal to operator !=  ------------------------------------//
     Determines if two Item are equal based on  data members
@@ -50,7 +44,7 @@ public:
     Postconditions:  boolean false if the left and right object are the same
     @return boolean true if different or false if not
     */
-   bool operator!=(const Comparable& right)const;
+   bool operator!=(const Comparable& right)const override;;
 
    /**
     //-------------------------- Overloaded lesser than operator <------------------------------------//
@@ -59,7 +53,7 @@ public:
     Postconditions: boolean true if the left hand side data is smaller than the data on the right hand side
     @return boolean true is left is smaller than right
     */
-   bool operator<(const Comparable& right)const;
+   bool operator<(const Comparable& right)const override;;
    
    /**
     //-------------------------- Overloaded greater than operator >  ------------------------------------//
@@ -68,12 +62,38 @@ public:
     Postconditions: boolean true if the left hand side data is larger than the data on the right hand side
     @return boolean true is left is larger than right
     */
-   bool operator>(const Comparable& right)const;
+   bool operator>(const Comparable& right)const override;;
    
-//   /**
-//    //-------------------------- Parametric constructor  for class ComicBook  ------------------------------------//
-//    Create and new Item Object with the description provided
-//    */
-//   ComicBook* create(std::string description);
-//   
+   /**
+    //-------------------------- Parametric constructor  for class ComicBook  ------------------------------------//
+    Create and new Item Object with the description provided
+    */
+   virtual Item* create() const override;;
+   
+   /**
+    //-------------------------- Method to set data  ------------------------------------//
+    sets the data members of an  Item Object with the parameters provided
+    */
+   //virtual  void setData(std::string stringCount, std::string description) const override;;
+   
+   /**
+    *  Initialize an instance of this class from an input stream.
+    *  Expected format is: {quantity},{year},{grade},{title},{publisher}
+    *  e.g. "4, 1986, Raging, Metallica, Master of Puppets"
+    *  @param in An input stream to read `ComicBook` data from.
+    *  @param book A reference to a `ComicBook` to initialize.
+    *  @return The input stream that was passed in.
+    */
+   friend std::istream& operator>>(std::istream& in, ComicBook& book);
+   
+   /**
+    *  Output a textual representation of this instance to the output stream.
+    *  @pre This instance must be initialized.
+    *  @post A textual representation of this instance is appended to
+    *   output stream.
+    *  @param out An output stream to append to.
+    *  @param book A card instance to append to the output stream.
+    *  @return The output stream that was passed in
+    */
+   friend std::ostream& operator<<(std::ostream& out, const ComicBook& book);
 };

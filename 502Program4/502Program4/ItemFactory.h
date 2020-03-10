@@ -9,8 +9,12 @@
 
 class ItemFactory
 {
+private:
+   Item* itemFactory[25]; // in general, do not hard code numbers, room to grow
+   int hash(char ch) const;
+
 public:
-   // Factory Method
-   static Item *make_Item(std::string itemCode);
-   //virtual void create() = 0;
+   ItemFactory();
+   virtual ~ItemFactory();
+   Item* make_Item(char ch) const;
 };
