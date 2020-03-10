@@ -48,7 +48,7 @@ public:
     //-------------------------- Method to set data  ------------------------------------//
     sets the data members of an  Item Object with the parameters provided
     */
-  // virtual void setData(std::string stringCount, std::string description) const = 0;
+  virtual void setData(std::string stringCount, std::string description);
    
    
 };

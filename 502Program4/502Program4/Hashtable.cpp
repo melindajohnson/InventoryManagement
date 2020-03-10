@@ -7,16 +7,17 @@
  Postconditions: The Hashtable is created with table size of buckets
  */
 Hashtable::Hashtable(){
-   
+   table = new HashNode*[totalBuckets]();
 }
-///**
-// //-------------------------- Parametric  construtcor ------------------------------------//
-// Preconditions: None
-// Postconditions: The Hashtable is created with table size of buckets
-// */
-//Hashtable::Hashtable(unsigned long buckets){
-//  
-//}
+/**
+ //-------------------------- Parametric  construtcor ------------------------------------//
+ Preconditions: None
+ Postconditions: The Hashtable is created with table size of buckets
+ */
+Hashtable::Hashtable(int buckets){
+ //  totalBuckets = buckets;
+   table = new HashNode*[buckets]();
+}
 /**
  //-------------------------- Destructor  for class Hashtable  ------------------------------------//
  Destroys object and frees memory allocated by object.
@@ -30,7 +31,7 @@ Hashtable::~Hashtable(){
  Preconditions: The Hashtable is created
  Postconditions: The Hashtable has a new Hashentry
  */
-void Hashtable::insert(std::string k, HashValueType* v){
+void Hashtable::insert(int k, HashValueType* v){
    int hashIndex = getHashIndex(k);
    HashNode *prev = NULL;
    HashNode *entry = table[hashIndex];
@@ -45,6 +46,7 @@ void Hashtable::insert(std::string k, HashValueType* v){
       if (prev == NULL) {
          // insert as first bucket
          table[hashIndex] = entry;
+         numberOfentries++;
       } else {
          prev->next = entry;
       }
@@ -58,7 +60,7 @@ void Hashtable::insert(std::string k, HashValueType* v){
  Preconditions: The Hashtable is created and filled HashEntries
  Postconditions: a  Hashentry is removed based on the key k
  */
-void Hashtable::remove(std::string k){
+void Hashtable::remove(int k){
    int hashIndex = getHashIndex(k);
    HashNode *prev = NULL;
    HashNode *entry = table[hashIndex];
@@ -76,6 +78,7 @@ void Hashtable::remove(std::string k){
       if (prev == NULL) {
             // remove first bucket of the list
          table[hashIndex] = entry->next;
+         numberOfentries--;
       } else {
          prev->next = entry->next;
       }
@@ -89,7 +92,7 @@ void Hashtable::remove(std::string k){
  Postconditions: a boolean true if the key exists and false is not
  @return a boolean true if the key exists and false is not
  */
-bool Hashtable::containsKey(std::string key){
+bool Hashtable::containsKey(int key){
    int hashIndex = getHashIndex(key);
    HashNode *entry = table[hashIndex];
    while (entry != NULL) {
@@ -105,7 +108,7 @@ bool Hashtable::containsKey(std::string key){
  Postconditions: HashValueType* from the Hashtable depending upon the key k
  @return HashValueType* from the Hashtable
  */
-HashValueType* Hashtable::getValue(std::string k){
+HashValueType* Hashtable::getValue(int k){
    int hashIndex = getHashIndex(k);
    HashNode *entry = table[hashIndex];
    while (entry != NULL) {
@@ -127,9 +130,9 @@ bool Hashtable::isEmpty(){
 }
 
 
-int Hashtable::getHashIndex(std::string k){
-   int intCount = atoi(k.c_str());
-   return intCount%totalBuckets;
+int Hashtable::getHashIndex(int k){
+ //  int intCount = atoi(k.c_str());
+   return k % totalBuckets;
 }
 
 /**

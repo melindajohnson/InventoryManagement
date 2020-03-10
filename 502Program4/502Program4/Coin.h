@@ -71,10 +71,10 @@ public:
    virtual Item* create() const override;
    
    /**
-    //-------------------------- Method to set data  ------------------------------------//
+    -------------------------- Method to set data  ------------------------------------//
     sets the data members of an  Item Object with the parameters provided
     */
-  // virtual void setData(std::string stringCount, std::string description) const override;
+   void setData(std::string stringCount, std::string description) override;
    
    /**
     *  Initialize an instance of this class from an input stream.

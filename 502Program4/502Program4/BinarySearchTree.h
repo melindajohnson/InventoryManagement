@@ -30,8 +30,9 @@ BinarySearchTree.h
 #include <iostream>
 #include <algorithm>
 #include "Comparable.h"
+#include "HashValueType.h"
 
-class BinarySearchTree
+class BinarySearchTree : public HashValueType
 {
 private:
    

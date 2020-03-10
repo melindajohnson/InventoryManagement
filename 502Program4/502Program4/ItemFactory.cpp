@@ -25,5 +25,7 @@ ItemFactory::ItemFactory() {
 
 Item* ItemFactory::make_Item(char ch) const {
    int subscript = hash(ch);             // would do error checking
+   if(itemFactory[subscript] != nullptr){
    return itemFactory[subscript]->create();
+   } else return nullptr;
 }

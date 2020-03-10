@@ -22,12 +22,13 @@ private:
    struct HashNode
    {
       HashValueType* value;
-      std::string key;
+      int key;
       HashNode* next;
    };
    
-   const static int totalBuckets = 101;
-   HashNode *table[totalBuckets];
+   static const int totalBuckets = 101;
+   HashNode** table;
+   int numberOfentries;
    
    /**
     //-------------------------- keyToHash ------------------------------------//
@@ -35,7 +36,7 @@ private:
     Postconditions: The parametric Key is hashed
     @return hashcode of type integer
     */
-   int keyToHash(const std::string key);
+   int keyToHash(const int key);
    
    /**
     //-------------------------- clear ------------------------------------//
@@ -51,12 +52,12 @@ public:
     Postconditions: The Hashtable is created with table size of buckets
     */
    Hashtable();
-//   /**
-//    //-------------------------- Parametric  construtcor ------------------------------------//
-//    Preconditions: None
-//    Postconditions: The Hashtable is created with table size of buckets
-//    */
-//   Hashtable(int buckets);
+   /**
+    //-------------------------- Parametric  construtcor ------------------------------------//
+    Preconditions: None
+    Postconditions: The Hashtable is created with table size of buckets
+    */
+   Hashtable(int buckets);
    /**
     //-------------------------- Destructor  for class Hashtable  ------------------------------------//
     Destroys object and frees memory allocated by object.
@@ -68,13 +69,13 @@ public:
     Preconditions: The Hashtable is created
     Postconditions: The Hashtable has a new Hashentry
     */
-   void insert(std::string k, HashValueType* v);
+   void insert(int k, HashValueType* v);
    /**
     //-------------------------- remove method ------------------------------------//
     Preconditions: The Hashtable is created and filled HashEntries
     Postconditions: a  Hashentry is removed based on the key k
     */
-   void remove(std::string k);
+   void remove(int k);
    
    /**
     //-------------------------- containsKey ------------------------------------//
@@ -82,14 +83,14 @@ public:
     Postconditions: a boolean true if the key exists and false is not
     @return a boolean true if the key exists and false is not
     */
-   bool containsKey(std::string key);
+   bool containsKey(int key);
    /**
     //-------------------------- getValue ------------------------------------//
     Preconditions: The Hashtable is created and filled HashEntries
     Postconditions: HashValueType* from the Hashtable depending upon the key k
     @return HashValueType* from the Hashtable
     */
-   HashValueType* getValue(std::string k);
+   HashValueType* getValue(int k);
    /**
     //-------------------------- isEmpty ------------------------------------//
     Preconditions:The Hashtable is created and filled HashEntries
@@ -98,7 +99,7 @@ public:
     */
    bool isEmpty();
    
-   int getHashIndex(std::string k);
+   int getHashIndex(int k);
 };
 
 

@@ -26,7 +26,7 @@ void Store::processDataFiles(Hashtable customerData, ifstream &inventoryFile, if
 void Store::FillInventory(ifstream &inventoryFile){
       
   // ItemFactory itemFactory;
-   itemManager.buildItemsByFactory(inventoryFile);
+   itemManager.buildItemsByFactory(inventoryFile, treeHash);
        
          //if code is invalid skip over to the next line in file
          //create new tree for new code and then insert item else just insert item
@@ -44,7 +44,7 @@ void Store::FillCustomerData(Hashtable customerData, ifstream &customerFile){
       getline(customerFile, name);    //get customer name
      // int customerID = atoi(id.c_str());
       Customer *c1 = new Customer();
-      customerData.insert(id, c1);
+    //  customerData.insert(1, c1);
    }
 }
 void Store::ProcessTransactions(Hashtable customerData, ifstream &commandfile){

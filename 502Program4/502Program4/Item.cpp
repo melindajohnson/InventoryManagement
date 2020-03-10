@@ -19,3 +19,11 @@ Item::Item(){
 Item:: ~Item(){
    
 }
+
+/**
+ //-------------------------- Method to set data  ------------------------------------//
+ sets the data members of an  Item Object with the parameters provided
+ */
+void Item::setData(std::string stringCount, std::string description){
+   //
+}

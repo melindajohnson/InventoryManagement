@@ -99,27 +99,27 @@ Item* SportsCard::create() const {
 }
 
 /**
- //-------------------------- Method to set data  ------------------------------------//
+ -------------------------- Method to set data  ------------------------------------//
  sets the data members of an  Item Object with the parameters provided
  */
-//void SportsCard::setData(std::string stringCount, std::string description){
-//   inventory = atoi(stringCount.c_str());
-//   std::string tokens[4];
-//   int i = 0;
-//   std::stringstream  data(description);
-//   std::string line;
-//   while(std::getline(data,line,','))
-//   {
-//      tokens[i] = line;
-//      i++;
-//      data.get();
-//   }
-//   year = tokens[0];
-//   grade = tokens[1];
-//   name = tokens[2];
-//   manufacturer = tokens[3];
-//   
-//}
+void SportsCard::setData(std::string stringCount, std::string description){
+   inventory = atoi(stringCount.c_str());
+   std::string tokens[4];
+   int i = 0;
+   std::stringstream  data(description);
+   std::string line;
+   while(std::getline(data,line,','))
+   {
+      tokens[i] = line;
+      i++;
+      data.get();
+   }
+   year = tokens[0];
+   grade = tokens[1];
+   name = tokens[2];
+   manufacturer = tokens[3];
+   
+}
 
 /**
  *  Initialize an instance of this class from an input stream.

@@ -22,6 +22,7 @@ Assumptions:
 #include <fstream>
 #include <iostream>
 #include <string>
+#include <vector>
 #include "ItemManager.h"
 #include "BinarySearchTree.h"
 #include "Hashtable.h"
@@ -33,9 +34,10 @@ using namespace std;
 
 class Store{
 private:
-   BinarySearchTree inventoryTree; // BinarySearchTree whose nodes point to items
+  // std::vector<BinarySearchTree> inventoryTree; // BinarySearchTree whose nodes point to items
    BinarySearchTree transactionTree; // BinarySearchTree whose nodes point to customerTransactions
    Hashtable inventoryHashtable; //Hashtable for quick retrival
+   Hashtable treeHash; //Hashtable for inserting into respective item tree
    ItemManager itemManager;
    
    /**

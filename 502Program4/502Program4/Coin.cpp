@@ -80,25 +80,25 @@ bool Coin::operator>(const Comparable& right)const{
 }
 
 /**
- //-------------------------- Method to set data  ------------------------------------//
+ -------------------------- Method to set data  ------------------------------------//
  sets the data members of an  Item Object with the parameters provided
  */
-//void Coin::setData(std::string stringCount, std::string description){
-//   inventory = atoi(stringCount.c_str());
-//   std::string tokens[3];
-//   int i = 0;
-//   std::stringstream  data(description);
-//   std::string line;
-//   while(std::getline(data,line,','))
-//   {
-//      tokens[i] = line;
-//      i++;
-//      data.get();
-//   }
-//   year = tokens[0];
-//   name = tokens[1];;
-//   grade = tokens[2];
-//}
+void Coin::setData(std::string stringCount, std::string description){
+   inventory = atoi(stringCount.c_str());
+   std::string tokens[3];
+   int i = 0;
+   std::stringstream  data(description);
+   std::string line;
+   while(std::getline(data,line,','))
+   {
+      tokens[i] = line;
+      i++;
+      data.get();
+   }
+   year = tokens[0];
+   grade = tokens[1];;
+   name = tokens[2];
+}
 /**
  //-------------------------- Parametric constructor  for class Coin  ------------------------------------//
  Create and new Item Object with the description provided

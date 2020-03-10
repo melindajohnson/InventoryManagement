@@ -6,6 +6,7 @@
 #include <iostream>
 #include <string>
 #include "ItemFactory.h"
+#include "Hashtable.h"
 #include "BinarySearchTree.h"
 class ItemManager {
 private:
@@ -14,7 +15,7 @@ private:
 public:
    ItemManager();
    
-   void buildItemsByFactory(std::ifstream &inventoryFile);
+   void buildItemsByFactory(std::ifstream &inventoryFile, Hashtable &treeHash);
    
    void displayItems() ;
    
