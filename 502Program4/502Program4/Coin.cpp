@@ -105,7 +105,6 @@ void Coin::setData(std::string stringCount, std::string description){
  */
  Item* Coin::create() const {
      return new Coin;
-     
   }
 
 /**

@@ -50,6 +50,19 @@ public:
     */
   virtual void setData(std::string stringCount, std::string description);
    
+   /**
+    //-------------------------- Method to increase inventory  ------------------------------------//
+    increments the inventory of an  Item Object by 1
+    */
+    void increaseInventory();
+   
+   /**
+    //-------------------------- Method to decrease inventory  ------------------------------------//
+    decrements the inventory of an  Item Object by 1
+    */
+   void decreaseInventory();
+   
+   
    
    /**
     

@@ -152,7 +152,7 @@ void BinarySearchTree::makeEmpty() {
  Postconditions: Finds a Comparable 'key' in the tree
  @return nullptr if not found or a comparable pointer if located in the tree
  */
-const Comparable* BinarySearchTree::retrieve(const Comparable& key) const {
+ Comparable* BinarySearchTree::retrieve(const Comparable& key) const {
    if (rootPtr == nullptr) return nullptr;
    return (retrieveHelper(rootPtr, key));
 }
@@ -233,7 +233,7 @@ bool BinarySearchTree::insertHelper(BSTNode*& root, Comparable* item) {
    else if (*item > * root->item)
       insertHelper(root->right, item); //Recursively calls the roots right if the comparable item is greater than the calling comparable item
    else if (*item == *root->item) {
-     // root->count++;  //increments count if the item already exists in the BinarySearchTree
+     //root->item->++;  //increments count if the item already exists in the BinarySearchTree
       delete item;   //The comparable pointer to be inserted is deallocated since it is not inserted in the tree
       return false;
    }
@@ -316,7 +316,7 @@ Comparable* BinarySearchTree::findAndDeleteMostLeft(BSTNode*& root)
  Postconditions: Finds a Comparable in the tree using the Comparable object key .
  @return nullptr if not found or a comparable pointer if located in the tree
  */
-const Comparable* BinarySearchTree::retrieveHelper(BSTNode* subTreePtr, const Comparable& key) const {
+ Comparable* BinarySearchTree::retrieveHelper(BSTNode* subTreePtr, const Comparable& key) const {
    if (subTreePtr == nullptr)
       return nullptr; //nullPtr is returned if there is no Node in the tree that contains the key or the subtree Pointer is itself a nullptr
    else if (key == *subTreePtr->item)

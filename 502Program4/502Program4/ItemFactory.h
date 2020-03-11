@@ -13,7 +13,6 @@ class ItemFactory
 {
 private:
    Hashtable *itemsHash = new Hashtable(numberOfItems);
-   int hash(char ch) const;
 
 public:
    ItemFactory();

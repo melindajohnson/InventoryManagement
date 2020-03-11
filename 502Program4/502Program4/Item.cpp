@@ -33,3 +33,19 @@ std::string Item::toString()const{
    return in + ", " + year + ", " + grade + ", " + name;
    
 }
+
+/**
+ //-------------------------- Method to increase inventory  ------------------------------------//
+ increments the inventory of an  Item Object by 1
+ */
+void Item::increaseInventory(){
+   inventory++;
+}
+
+/**
+ //-------------------------- Method to decrease inventory  ------------------------------------//
+ decrements the inventory of an  Item Object by 1
+ */
+void Item::decreaseInventory(){
+   inventory--;
+}

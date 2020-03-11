@@ -9,13 +9,15 @@
 #pragma once
 #include <stdio.h>
 #include <string>
+#include <vector>
 #include "HashValueType.h"
-#include "Command.h"
+#include "TransactionItem.h"
 
 class Customer: public HashValueType, public Comparable {
 private:
    std::string customerName;
-   std::vector<Command*> transactions;
+   std::vector<TransactionItem*> transactionList ;
+   
 public:
    
    Customer(std::string name);
@@ -57,4 +59,5 @@ public:
    
    virtual std::string toString()const override;
    
+   void addTransactions(TransactionItem* transactionItem);
 };

@@ -24,17 +24,39 @@ Store::Store(){
 void Store::processDataFiles(ifstream &inventoryFile, ifstream &customerFile, ifstream &commandfile){
    FillInventory(inventoryFile);
    FillCustomerData(customerFile);
-      // ProcessTransactions(customerData, commandfile);
+   ProcessTransactions(commandfile);
 }
 void Store::FillInventory(ifstream &inventoryFile){
-   
-   itemManager.buildItemsByFactory(inventoryFile, *treeHash);
-   display(*treeHash);
-   
+   while(inventoryFile.peek() != EOF){
+         //if (inventoryFile.eof()) break;
+      std::string type;
+      std::string stringCount;
+      std::string description;
+      getline(inventoryFile, type, ',');          //get type of inventory
+      inventoryFile.get();          //discard space
+      getline(inventoryFile, stringCount, ',');    //get count
+      inventoryFile.get();          //discard space
+      getline(inventoryFile, description, '\n');    //get rest of info
+      Item *ptr = itemManager.buildItemsByFactory(type);
+      if(ptr!= nullptr){
+         ptr->setData(stringCount, description);
+            // int key = code - 'A';
+            //create new tree for new code and then insert item else just insert item
+         if(treeHash->containsKey(type)){
+            BinarySearchTree *tree = dynamic_cast<BinarySearchTree*>(treeHash->getValue(type));
+            tree->insert(ptr);
+         }else{
+            BinarySearchTree *tree = new BinarySearchTree;
+            treeHash->insert(type, tree);
+            tree->insert(ptr);
+         }
+      }
+      
+   }
 }
 void Store::FillCustomerData(ifstream &customerFile){
       //read customer id and customer name file until eof
-    while(customerFile.peek() != EOF){
+   while(customerFile.peek() != EOF){
       std::string id;
       std::string name;
       getline(customerFile, id, ',');          //get customer id
@@ -45,38 +67,76 @@ void Store::FillCustomerData(ifstream &customerFile){
       customerTree.insert(c1);
       
    }
-   // display(*customerData);
+      // display(*customerData);
    
 }
 void Store::ProcessTransactions(ifstream &commandfile){
-      //read command file until eof
- while(commandfile.peek() != EOF){
+   std::string input;       //command code
+   std::string id;          //customer Id
+   std::string itemCode;    //item code
+   std::string description; //command code
+                            //read command file until eof
+                            //S, 001, S, 1989, Near Mint, Ken Griffey Jr., Upper Deck
+   while(commandfile.peek() != EOF){
+      getline(commandfile, input, ',');        //get command code
+      commandfile.get();                      //discard space
+      getline(commandfile, id, ',');          //get customer id
+      commandfile.get();                      //discard space
+      getline(commandfile, itemCode, ',');          //get customer id
+      commandfile.get();                      //discard space
+      getline(commandfile, description,'\n');          //get customer id
+      commandfile.get();                      //discard space
       
-      char input=' '; //read command code
-      switch(input)
+      switch(input.at(0))
       {
-         case 'S':
+         case 'S':{
+            
+            //read customer id and find out customer name in the customerData hashtable
+            Customer *c1 = dynamic_cast<Customer*>(customerHash->getValue(id));
+            BinarySearchTree *tree = dynamic_cast<BinarySearchTree*>(treeHash->getValue(itemCode));
+            Item *ptr = itemManager.buildItemsByFactory(itemCode);
+            if(ptr!= nullptr){
+               ptr->setData(" ", description);
+            }
+            Item *item = dynamic_cast<Item*>(tree->retrieve(*ptr));
+            //increase inventory of the particular object by 1
+            item->increaseInventory();
+            TransactionItem *t1 = new TransactionItem(input, item);
+            c1->addTransactions(t1);
+            break;
+         }
+         case 'B':{
                //read customer id and find out customer name in the customerData hashtable
+            Customer *c1 = dynamic_cast<Customer*>(customerHash->getValue(id));
+            BinarySearchTree *tree = dynamic_cast<BinarySearchTree*>(treeHash->getValue(itemCode));
+            Item *ptr = itemManager.buildItemsByFactory(itemCode);
+            if(ptr!= nullptr){
+               ptr->setData(" ", description);
+            }
+            Item *item = dynamic_cast<Item*>(tree->retrieve(*ptr));
                //increase inventory of the particular object by 1
-               //transactionTree.insert(customerTransaction);
+            item->decreaseInventory();
+            TransactionItem *t1 = new TransactionItem(input, item);
+            c1->addTransactions(t1);
             break;
-         case 'B':
-               //read customer id and find out customer name in the customerData hashtable
-               //reduce inventory of the particular object by 1
-               //add customerTransaction in TransactionTree
+         }
+         case 'C':{
+            Customer *c1 = dynamic_cast<Customer*>(customerHash->getValue(id));
+            c1->toString();
             break;
-         case 'C':
-               //read customer id and find out customer name in the customerData hashtable
-               //Search for Customer in TransactionTree and output transactions
-            break;
-         case 'D':
+         }
+         case 'D':{
                //Inorder traversal of the InventoryTree outputs the entire inventory of the store
+            display(*treeHash);
             break;
-         case 'H':
+         }
+         case 'H':{
                //Inorder traversal of the TransactionTree outputs the entire history of transactions that took place in the store along with the customer details
             break;
-         default:
+         }
+         default:{
             std::cout << "Invalid Code." << std::endl;
+         }
       }
    }
 }

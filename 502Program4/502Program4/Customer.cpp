@@ -55,7 +55,18 @@ bool Customer::operator>(const Comparable& right)const{
 
 
 std::string Customer::toString()const{
-   //output all transactions of cutsomer
-   return " ";
+   std::cout << std::endl;
+   std::string customerDetails = customerName;
+//   for (auto it = begin (transactionList); it != end (transactionList); ++it) {
+//      customerDetails = customerDetails + (*it)->code;
+//      if((*it)->ptr != nullptr){
+//         std::cout << (*it)->ptr;
+//      }
+//   }
+   return customerDetails;
+
 }
 
+void Customer::addTransactions(TransactionItem* transactionItem){
+   transactionList.push_back(transactionItem);
+}

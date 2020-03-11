@@ -15,7 +15,7 @@ private:
 public:
    ItemManager();
    
-   void buildItemsByFactory(std::ifstream &inventoryFile, Hashtable &treeHash);
+   Item* buildItemsByFactory(std::string type);
    
    void displayItems() ;
    

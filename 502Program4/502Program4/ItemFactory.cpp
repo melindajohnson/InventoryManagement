@@ -1,11 +1,6 @@
 #include "ItemFactory.h"
 
 
-int ItemFactory::hash(char ch) const{
-   return ch-'A';
-   
-}
-
 ItemFactory::ItemFactory() {
     itemsHash->insert("C", new ComicBook);
     itemsHash->insert("M", new Coin);

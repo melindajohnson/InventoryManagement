@@ -132,7 +132,7 @@ public:
     Postconditions: Finds a Comparable 'key' in the tree
     @return nullptr if not found or a comparable pointer if located in the tree
     */
-   const Comparable* retrieve(const Comparable& key) const;
+    Comparable* retrieve(const Comparable& key) const;
    
    /*
     //--------------------------Height method  ------------------------------------//
@@ -201,7 +201,7 @@ public:
     Postconditions: Finds a Comparable in the tree using the Comparable object key .
     @return nullptr if not found or a comparable pointer if located in the tree
     */
-   const Comparable* retrieveHelper(BSTNode* subTreePtr, const Comparable& key) const;
+    Comparable* retrieveHelper(BSTNode* subTreePtr, const Comparable& key) const;
    
    /*
     //--------------------------searchForNode method  ------------------------------------//

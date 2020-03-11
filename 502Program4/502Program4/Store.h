@@ -28,7 +28,7 @@ Assumptions:
 
 #include "Item.h"
 #include "ItemFactory.h"
-#include "CustomerTransactions.h"
+#include "TransactionItem.h"
 #include "Customer.h"
 using namespace std;
 const static int totalBuckets = 26;
