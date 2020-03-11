@@ -102,7 +102,7 @@ Item* ComicBook::create() const {
  sets the data members of an  Item Object with the parameters provided
  */
 void ComicBook::setData(std::string stringCount, std::string description){
-   inventory = atoi(stringCount.c_str());
+   inventoryCount = atoi(stringCount.c_str());
    std::string tokens[4];
    int i = 0;
    std::stringstream  data(description);
@@ -119,32 +119,33 @@ void ComicBook::setData(std::string stringCount, std::string description){
    publisher = tokens[3];
 
 }
-
 /**
- *  Initialize an instance of this class from an input stream.
- *  Expected format is: {quantity},{year},{grade},{title},{publisher}
- *  e.g. "4, 1986, Raging, Metallica, Master of Puppets"
- *  @param in An input stream to read `ComicBook` data from.
- *  @param book A reference to a `ComicBook` to initialize.
- *  @return The input stream that was passed in.
+ *  Output a textual representation of this instance to the output stream.
+ *  @pre This instance must be initialized.
+ *  @post A textual representation of this instance is appended to a string and returned
+ *  @return A textual representation of this instance is appended to a string
  */
- std::istream& operator>>(std::istream& in, ComicBook& book){
-    return in;
+std::string ComicBook::toString() const {
+   return  Item::toString() + ", " + publisher;
 }
+
 
 /**
  *  Output a textual representation of this instance to the output stream.
  *  @pre This instance must be initialized.
- *  @post A textual representation of this instance is appended to
- *   output stream.
- *  @param out An output stream to append to.
- *  @param book A card instance to append to the output stream.
- *  @return The output stream that was passed in
+ *  @post A textual representation of this instance is appended to a string and returned
+ *  @return A textual representation of this instance is appended to a string
  */
- std::ostream& operator<<(std::ostream& out, const ComicBook& book){
-    return out;
+std::string ComicBook::toStringWithoutCount()const{
+   return Item::toStringWithoutCount() + ", " + publisher;;
 }
 
-std::string ComicBook::toString() const {
-   return  Item::toString() + ", " + publisher;
+/**
+ //--------------------------Overloaded output operator <<  ------------------------------------//
+ Preconditions: A comparable object is created and its data is set
+ Postconditions: Outputs the Comparable objects
+ */
+std::ostream& operator<<(std::ostream& out, const ComicBook& obj1) {
+   out << obj1.toString();
+   return out;
 }

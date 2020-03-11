@@ -17,5 +17,4 @@ std::ostream& operator<<(std::ostream& out, const Comparable& obj1){
    out << obj1.toString();
    return out;
 }
-   
-
+ 

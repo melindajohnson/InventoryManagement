@@ -74,6 +74,7 @@ public:
     */
    void processDataFiles(ifstream &inventoryFile, ifstream &customerFile, ifstream &commandfile);
    
-   void display(Hashtable& h1);
+   void displayInventory(Hashtable& h1);
+   void displayAllCustomer(Hashtable& h1);
 };
 

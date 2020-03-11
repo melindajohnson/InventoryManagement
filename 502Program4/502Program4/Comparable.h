@@ -67,10 +67,11 @@ public:
    friend std::ostream& operator<<(std::ostream& out, const Comparable& obj1);
    
    /**
-    
+    *  Output a textual representation of this instance to the output stream.
+    *  @pre This instance must be initialized.
+    *  @post A textual representation of this instance is appended to a string and returned
+    *  @return A textual representation of this instance is appended to a string
     */
-   virtual std::string toString()const= 0;
-   
-  
+   virtual std::string toString()const=0;
 };
 

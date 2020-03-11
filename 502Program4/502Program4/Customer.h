@@ -11,12 +11,16 @@
 #include <string>
 #include <vector>
 #include "HashValueType.h"
+#include "Comparable.h"
+#include "Item.h"
 #include "TransactionItem.h"
 
 class Customer: public HashValueType, public Comparable {
 private:
+   
    std::string customerName;
    std::vector<TransactionItem*> transactionList ;
+   
    
 public:
    
@@ -57,7 +61,13 @@ public:
     */
    bool operator>(const Comparable& right)const override;
    
-   virtual std::string toString()const override;
+   std::string toString()const override;
    
    void addTransactions(TransactionItem* transactionItem);
+   
+   /*
+    //--------------------------Overloaded output operator <<  ------------------------------------//
+    
+    */
+   friend std::ostream& operator<<(std::ostream& out, const Customer& c) ;
 };

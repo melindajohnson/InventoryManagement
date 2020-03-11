@@ -84,7 +84,7 @@ bool Coin::operator>(const Comparable& right)const{
  sets the data members of an  Item Object with the parameters provided
  */
 void Coin::setData(std::string stringCount, std::string description){
-   inventory = atoi(stringCount.c_str());
+   inventoryCount = atoi(stringCount.c_str());
    std::string tokens[3];
    int i = 0;
    std::stringstream  data(description);
@@ -108,32 +108,33 @@ void Coin::setData(std::string stringCount, std::string description){
   }
 
 /**
- *  Initialize an instance of this class from an input stream.
- *  Expected format is: {quantity},{year},{grade},{type}
- *  e.g. "10, 1913, 70, Liberty Nickel"
- *  @param in An input stream to read `Coin` data from.
- *  @param coin A reference to a `Coin` to initialize.
- *  @return The input stream that was passed in.
+ *  Output a textual representation of this instance to the output stream.
+ *  @pre This instance must be initialized.
+ *  @post A textual representation of this instance is appended to a string and returned
+ *  @return A textual representation of this instance is appended to a string
  */
-std::istream& operator>>(std::istream& in, Coin& coin){
-   return in;
+std::string Coin::toString() const {
+   
+   return Item::toString();
 }
+
 
 /**
  *  Output a textual representation of this instance to the output stream.
  *  @pre This instance must be initialized.
- *  @post A textual representation of this instance is appended to
- *   output stream.
- *  @param out An output stream to append to.
- *  @param coin A reference to a coin to append to the output stream.
- *  @return The output stream that was passed in.
+ *  @post A textual representation of this instance is appended to a string and returned
+ *  @return A textual representation of this instance is appended to a string
  */
-std::ostream& operator<<(std::ostream& out, const Coin& coin){
-   return out;
+std::string Coin::toStringWithoutCount()const{
+   return Item::toStringWithoutCount();
 }
 
-
-std::string Coin::toString() const {
-   
-   return Item::toString();
+/**
+ //--------------------------Overloaded output operator <<  ------------------------------------//
+ Preconditions: A comparable object is created and its data is set
+ Postconditions: Outputs the Comparable objects
+ */
+std::ostream& operator<<(std::ostream& out, const Coin& obj1) {
+   out << obj1.toString();
+   return out;
 }

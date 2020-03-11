@@ -81,28 +81,22 @@ public:
    void setData(std::string stringCount, std::string description) override;
    
    /**
-    *  Initialize an instance of this class from an input stream.
-    *  Expected format is: {quantity},{year},{grade},{player},{manufacturer}
-    *  e.g. "9, 1989, Near Mint, Ken Griffey Jr., Upper Deck"
-    *  @param in An input stream to read `Card` data from.
-    *  @param card A reference to a `Card` to initialize.
-    *  @return The input stream that was passed in.
+    *  Output a textual representation of this instance to the output stream.
+    *  @pre This instance must be initialized.
+    *  @post A textual representation of this instance is appended to a string and returned
+    *  @return A textual representation of this instance is appended to a string
     */
-   friend std::istream& operator>>(std::istream& in, SportsCard& card);
+   virtual std::string toString()const override;
+   
    
    /**
     *  Output a textual representation of this instance to the output stream.
     *  @pre This instance must be initialized.
-    *  @post A textual representation of this instance is appended to
-    *   output stream.
-    *  @param out An output stream to append to.
-    *  @param card A card instance to append to the output stream.
-    *  @return The output stream that was passed in
+    *  @post A textual representation of this instance is appended to a string and returned
+    *  @return A textual representation of this instance is appended to a string
     */
-   friend std::ostream& operator<<(std::ostream& out, const SportsCard& card);
+   virtual std::string toStringWithoutCount()const override;
    
-   /**
-    
-    */
-   virtual std::string toString()const override;
+   friend std::ostream& operator<<(std::ostream& out, const SportsCard& obj1) ;
 };
+

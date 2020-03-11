@@ -74,32 +74,24 @@ public:
     -------------------------- Method to set data  ------------------------------------//
     sets the data members of an  Item Object with the parameters provided
     */
-   void setData(std::string stringCount, std::string description) override;
-   
-   /**
-    *  Initialize an instance of this class from an input stream.
-    *  Expected format is: {quantity},{year},{grade},{type}
-    *  e.g. "10, 1913, 70, Liberty Nickel"
-    *  @param in An input stream to read `Coin` data from.
-    *  @param coin A reference to a `Coin` to initialize.
-    *  @return The input stream that was passed in.
-    */
-   friend std::istream& operator>>(std::istream& in, Coin& coin);
+   void setData(std::string stringCount, std::string description) override ;
    
    /**
     *  Output a textual representation of this instance to the output stream.
     *  @pre This instance must be initialized.
-    *  @post A textual representation of this instance is appended to
-    *   output stream.
-    *  @param out An output stream to append to.
-    *  @param coin A reference to a coin to append to the output stream.
-    *  @return The output stream that was passed in.
+    *  @post A textual representation of this instance is appended to a string and returned
+    *  @return A textual representation of this instance is appended to a string
     */
-   friend std::ostream& operator<<(std::ostream& out, const Coin& coin);
+   virtual std::string toString()const override;
    
    
    /**
-    
+    *  Output a textual representation of this instance to the output stream.
+    *  @pre This instance must be initialized.
+    *  @post A textual representation of this instance is appended to a string and returned
+    *  @return A textual representation of this instance is appended to a string
     */
-   virtual std::string toString()const override;
+   virtual std::string toStringWithoutCount()const override;
+   
+    friend std::ostream& operator<<(std::ostream& out, const Coin& obj1) ;
 };

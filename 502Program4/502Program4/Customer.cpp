@@ -55,18 +55,29 @@ bool Customer::operator>(const Comparable& right)const{
 
 
 std::string Customer::toString()const{
-   std::cout << std::endl;
-   std::string customerDetails = customerName;
-//   for (auto it = begin (transactionList); it != end (transactionList); ++it) {
-//      customerDetails = customerDetails + (*it)->code;
-//      if((*it)->ptr != nullptr){
-//         std::cout << (*it)->ptr;
-//      }
-//   }
-   return customerDetails;
-
+   std::string contents;
+   contents = customerName + "\n";
+   for (auto it = begin (transactionList); it != end (transactionList); ++it) {
+      contents = contents + (*it)->toString() + "\n";
+   }
+   return contents;
 }
 
 void Customer::addTransactions(TransactionItem* transactionItem){
    transactionList.push_back(transactionItem);
+}
+
+
+/*
+ //--------------------------Overloaded output operator <<  ------------------------------------//
+
+ */
+std::ostream& operator<<(std::ostream& out, const Customer& c) {
+   out << c.customerName << std::endl;
+  // out << "Transactions List " << std::endl;
+   for (auto it = begin (c.transactionList); it != end (c.transactionList); ++it) {
+      out << *(*it);
+   }
+   return out;
+   
 }

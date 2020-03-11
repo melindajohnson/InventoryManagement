@@ -7,7 +7,7 @@ class TransactionItem  {
 private:
  
       std::string code;  //code would S for sell and B for Buy
-      Item* ptr;
+      Item* itemPtr;
   
    
 public:
@@ -28,7 +28,14 @@ public:
     Destroys object and frees memory allocated by object.
     */
    virtual ~TransactionItem();
-
+   
+   /*
+    //--------------------------Overloaded output operator <<  ------------------------------------//
+    
+    */
+   friend std::ostream& operator<<(std::ostream& out, const TransactionItem& c);
+   
+   std::string toString()const;
    
 };
  
