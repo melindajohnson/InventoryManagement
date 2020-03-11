@@ -7,8 +7,8 @@
 using namespace std;
 
 int main() {
-   // open file
    
+   // open file
    ifstream inventoryFile("hw4inventory.txt");
    ifstream customerFile("hw4customers.txt");
    ifstream commandfile("hw4commands.txt");
@@ -26,11 +26,9 @@ int main() {
       return 1;
    }
    
-   std::cout << "IN";
-   Store s1; //create a store object
-   Hashtable customerData(26); //create a hashtable object for filling with customer data
-   
+   //create a store object
+   Store s1;
    //process data files in store 1
-   s1.processDataFiles(customerData, inventoryFile, customerFile, commandfile);
+   s1.processDataFiles(inventoryFile, customerFile, commandfile);
    
 }

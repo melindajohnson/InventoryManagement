@@ -32,14 +32,16 @@ Assumptions:
 #include "Customer.h"
 using namespace std;
 const static int totalBuckets = 26;
+const static int totalCustomers = 101;
 
 class Store{
 private:
  
-   BinarySearchTree transactionTree; // BinarySearchTree whose nodes point to customerTransactions
-   //Hashtable inventoryHashtable = new Hashtable(totalBuckets); //Hashtable for quick retrival
+   BinarySearchTree customerTree; // BinarySearchTree whose nodes point to customerTransactions
    Hashtable *treeHash = new Hashtable(totalBuckets); //Hashtable for inserting into respective item tree
+   Hashtable *customerHash= new Hashtable(totalCustomers); //create a hashtable object for filling with customer data
    ItemManager itemManager;
+   
    
    /**
     //-------------------------- FillInventory ------------------------------------//
@@ -52,13 +54,13 @@ private:
     Preconditions: A store object is created
     Postconditions: The customerData hashtable is filled with customer information
     */
-   void FillCustomerData(Hashtable& customerData, ifstream &customerFile);
+   void FillCustomerData(ifstream &customerFile);
    /**
     //-------------------------- ProcessTransactions------------------------------------//
     Preconditions: A store object is created and inventorytree and customerData is filled with data
     Postconditions: The rootPtr of the Searchtree is initialized to a nullptr
     */
-   void ProcessTransactions(Hashtable& customerData, ifstream &commandfile);
+   void ProcessTransactions(ifstream &commandfile);
    
    
    
@@ -70,7 +72,7 @@ public:
     Preconditions: A store object is created and a hashtable object is created
     Postconditions: The inventory tree,inventoryHashtable, customerData Hashtable and transactionTree are all filled with data
     */
-   void processDataFiles(Hashtable& customerData, ifstream &inventoryFile, ifstream &customerFile, ifstream &commandfile);
+   void processDataFiles(ifstream &inventoryFile, ifstream &customerFile, ifstream &commandfile);
    
    void display(Hashtable& h1);
 };

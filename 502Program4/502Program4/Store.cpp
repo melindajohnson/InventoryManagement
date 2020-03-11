@@ -21,9 +21,9 @@
 Store::Store(){
    std::cout << "out";
 }
-void Store::processDataFiles(Hashtable& customerData, ifstream &inventoryFile, ifstream &customerFile, ifstream &commandfile){
+void Store::processDataFiles(ifstream &inventoryFile, ifstream &customerFile, ifstream &commandfile){
    FillInventory(inventoryFile);
-      // FillCustomerData(customerData, customerFile);
+   FillCustomerData(customerFile);
       // ProcessTransactions(customerData, commandfile);
 }
 void Store::FillInventory(ifstream &inventoryFile){
@@ -32,24 +32,25 @@ void Store::FillInventory(ifstream &inventoryFile){
    display(*treeHash);
    
 }
-void Store::FillCustomerData(Hashtable& customerData, ifstream &customerFile){
-      //read customerdata file until eof
-   for(;;){
-         //read customer id and customer name
-      if (customerFile.eof()) break;
+void Store::FillCustomerData(ifstream &customerFile){
+      //read customer id and customer name file until eof
+    while(customerFile.peek() != EOF){
       std::string id;
       std::string name;
       getline(customerFile, id, ',');          //get customer id
-      customerFile.get();          //discard space
-      getline(customerFile, name);    //get customer name
-                                      //  int customerID = atoi(id.c_str());
-                                      //   Customer *c1 = new Customer();
-                                      // customerData.insert(customerID, c1);
+      customerFile.get();                      //discard space
+      getline(customerFile, name, '\n');       //get customer name
+      Customer *c1 = new Customer(name);
+      customerHash->insert(id, c1);
+      customerTree.insert(c1);
+      
    }
+   // display(*customerData);
+   
 }
-void Store::ProcessTransactions(Hashtable& customerData, ifstream &commandfile){
+void Store::ProcessTransactions(ifstream &commandfile){
       //read command file until eof
-   for(;;){
+ while(commandfile.peek() != EOF){
       
       char input=' '; //read command code
       switch(input)
@@ -86,7 +87,7 @@ void Store::display(Hashtable& h1){
    for (auto it = begin (itemsContent); it != end (itemsContent); ++it) {
       BinarySearchTree *item = dynamic_cast<BinarySearchTree*>(*it);
       if(item != nullptr){
-       std::cout << *item;
+         std::cout << *item;
       }
    }
 }

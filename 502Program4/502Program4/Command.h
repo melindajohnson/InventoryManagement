@@ -1,8 +1,11 @@
 
 
-#ifndef Command_hpp
-#define Command_hpp
-
+#pragma once
 #include <stdio.h>
-
-#endif /* Command_hpp */
+#include "Item.h"
+class Command {
+protected:
+   Item* itemPtr;
+public:
+   Command();
+};
