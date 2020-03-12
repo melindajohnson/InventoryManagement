@@ -16,6 +16,6 @@ HistoryCommand::HistoryCommand(){
 Command* HistoryCommand::create() const {
    return new HistoryCommand;
 }
-void HistoryCommand::execute(std::string commandString, Store *store) {
+void HistoryCommand::execute(std::string commandString, StoreRepository *store) {
    std::cout << store->customerTree;
 }

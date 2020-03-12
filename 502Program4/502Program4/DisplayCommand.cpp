@@ -16,7 +16,7 @@ DisplayCommand::DisplayCommand(){
 Command* DisplayCommand::create() const {
    return new DisplayCommand;
 }
-void DisplayCommand::execute(std::string commandString, Store *store) {
+void DisplayCommand::execute(std::string commandString, StoreRepository *store) {
    std::cout << std::endl;
    std::vector<HashValueType*> itemsContent = store->treeHash->getContents();
    for (auto it = begin (itemsContent); it != end (itemsContent); ++it) {

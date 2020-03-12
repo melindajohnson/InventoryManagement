@@ -3,7 +3,7 @@
 #pragma once
 #include <stdio.h>
 #include <string>
-#include "Store.h"
+#include "StoreRepository.h"
 #include "Customer.h"
 #include "TransactionItem.h"
 
@@ -25,7 +25,7 @@ public:
     */
    virtual Command* create() const = 0;
    
-   virtual void execute(std::string commandString, Store *store) =0;
+   virtual void execute(std::string commandString, StoreRepository *store) =0;
    
    virtual void readInput(std::string commandString);
 };

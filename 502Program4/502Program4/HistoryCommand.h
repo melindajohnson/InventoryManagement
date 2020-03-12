@@ -20,5 +20,5 @@ public:
     */
    virtual Command* create() const override;
    
-   virtual void execute(std::string commandString, Store *store) override;
+   virtual void execute(std::string commandString, StoreRepository *store) override;
 };

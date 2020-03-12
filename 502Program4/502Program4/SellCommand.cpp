@@ -15,7 +15,7 @@ Command* SellCommand::create() const {
    return new SellCommand;
 }
 
-void SellCommand::execute(std::string commandString, Store *store){
+void SellCommand::execute(std::string commandString, StoreRepository *store){
    readInput(commandString);
    Customer *c1 = dynamic_cast<Customer*>(store->customerHash->getValue(customerId));
    if(c1!= nullptr){
