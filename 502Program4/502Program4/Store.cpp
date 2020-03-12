@@ -96,6 +96,9 @@ void Store::ProcessTransactions(ifstream &commandfile){
       id = tokens[1];;
       itemCode = tokens[2];
       description = tokens[3] + ", " + tokens[4]+ ", " + tokens[5] + ", "+ tokens[6];
+      CommandFactory  commandFactory;
+      Command *commandPtr = commandFactory.buildCommandsByFactory(commandCode);
+      commandPtr->execute(id, itemCode, description);
       
       switch(commandCode.at(0))
       {

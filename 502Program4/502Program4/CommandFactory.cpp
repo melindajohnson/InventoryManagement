@@ -20,3 +20,7 @@ Command* CommandFactory::make_Command(std::string code) const {
    }
    else return nullptr;
 }
+
+Command* CommandFactory::buildCommandsByFactory(std::string code) const{
+    return make_Command(code);
+}

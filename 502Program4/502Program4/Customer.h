@@ -14,12 +14,14 @@
 #include "Comparable.h"
 #include "Item.h"
 #include "TransactionItem.h"
+#include "Command.h"
 
 class Customer: public HashValueType, public Comparable {
 private:
    
    std::string customerName;
-   std::vector<TransactionItem*> transactionList ;
+   //std::vector<TransactionItem*> transactionList ;
+   std::vector<Command*> transactionList ;
    
    
 public:
@@ -63,7 +65,7 @@ public:
    
    std::string toString()const override;
    
-   void addTransactions(TransactionItem* transactionItem);
+   void addTransactions(Command* transactionItem);
    
    /*
     //--------------------------Overloaded output operator <<  ------------------------------------//

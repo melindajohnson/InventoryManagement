@@ -25,10 +25,9 @@ Assumptions:
 #include <vector>
 #include "ItemManager.h"
 #include "BinarySearchTree.h"
-
-#include "Item.h"
+#include "Comparable.h"
 #include "ItemFactory.h"
-#include "TransactionItem.h"
+#include "CommandFactory.h"
 #include "Customer.h"
 using namespace std;
 const static int totalBuckets = 26;

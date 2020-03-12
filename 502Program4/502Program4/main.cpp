@@ -3,6 +3,7 @@
 #include <string>
 #include <fstream>
 #include "Store.h"
+#include "Command.h"
 
 using namespace std;
 

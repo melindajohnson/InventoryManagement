@@ -63,7 +63,7 @@ std::string Customer::toString()const{
    return contents;
 }
 
-void Customer::addTransactions(TransactionItem* transactionItem){
+void Customer::addTransactions(Command* transactionItem){
    transactionList.push_back(transactionItem);
 }
 
