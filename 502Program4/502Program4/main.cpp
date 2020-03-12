@@ -2,7 +2,7 @@
 #include <iostream>
 #include <string>
 #include <fstream>
-#include "Store.h"
+#include "StoreManager.h"
 #include "Command.h"
 
 using namespace std;
@@ -28,7 +28,7 @@ int main() {
    }
    
    //create a store object
-   Store s1;
+   StoreManager s1;
    //process data files in store 1
    s1.processDataFiles(inventoryFile, customerFile, commandfile);
    

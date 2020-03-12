@@ -3,7 +3,7 @@
 
 #include <stdio.h>
 #include "Command.h"
-class BuyCommand: public  Command{
+class BuyCommand: public Command{
 private:
    
 public:
@@ -18,5 +18,5 @@ public:
     */
    virtual Command* create() const override;
    
-   virtual void execute(std::string customerId, std::string itemCode, std::string description) override;
+   virtual void execute(std::string commandString, Store *store) override;
 };

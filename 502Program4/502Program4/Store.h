@@ -23,57 +23,23 @@ Assumptions:
 #include <iostream>
 #include <string>
 #include <vector>
-#include "ItemManager.h"
 #include "BinarySearchTree.h"
 #include "Comparable.h"
 #include "ItemFactory.h"
-#include "CommandFactory.h"
-#include "Customer.h"
-using namespace std;
+
+
 const static int totalBuckets = 26;
 const static int totalCustomers = 101;
 
 class Store{
-private:
+public:
  
    BinarySearchTree customerTree; // BinarySearchTree whose nodes point to customerTransactions
    Hashtable *treeHash = new Hashtable(totalBuckets); //Hashtable for inserting into respective item tree
    Hashtable *customerHash= new Hashtable(totalCustomers); //create a hashtable object for filling with customer data
-   ItemManager itemManager;
-   
-   
-   /**
-    //-------------------------- FillInventory ------------------------------------//
-    Preconditions: A store object is created
-    Postconditions: The inventory tree is filled with items in the store
-    */
-   void FillInventory(ifstream &inventoryFile);
-   /**
-    //-------------------------- FillCustomerData ------------------------------------//
-    Preconditions: A store object is created
-    Postconditions: The customerData hashtable is filled with customer information
-    */
-   void FillCustomerData(ifstream &customerFile);
-   /**
-    //-------------------------- ProcessTransactions------------------------------------//
-    Preconditions: A store object is created and inventorytree and customerData is filled with data
-    Postconditions: The rootPtr of the Searchtree is initialized to a nullptr
-    */
-   void ProcessTransactions(ifstream &commandfile);
-   
-   
-   
-public:
-   
+   ItemFactory  itemFactory;
    Store();
-   /**
-    //-------------------------- processDataFiles ------------------------------------//
-    Preconditions: A store object is created and a hashtable object is created
-    Postconditions: The inventory tree,inventoryHashtable, customerData Hashtable and transactionTree are all filled with data
-    */
-   void processDataFiles(ifstream &inventoryFile, ifstream &customerFile, ifstream &commandfile);
    
-   void displayInventory(Hashtable& h1);
-   void displayAllCustomer(Hashtable& h1);
+  
 };
 

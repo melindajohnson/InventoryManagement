@@ -1,10 +1,9 @@
 
 #pragma once
+
 #include <stdio.h>
 #include "Command.h"
-
 class SellCommand: public Command{
-   
 private:
    
 public:
@@ -13,11 +12,11 @@ public:
     Create a new SellCommand Object
     */
    SellCommand();
-   
    /**
     //-------------------------- Parametric constructor  for class Command  ------------------------------------//
     Create a new Command Object
     */
    virtual Command* create() const override;
    
- virtual void execute(std::string customerId, std::string itemCode, std::string description) override;
+   virtual void execute(std::string commandString, Store *store) override;
+};

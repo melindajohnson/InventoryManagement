@@ -2,14 +2,17 @@
 
 #pragma once
 #include <stdio.h>
-#include "Comparable.h"
-#include "HashValueType.h"
+#include <string>
+#include "Store.h"
+#include "Customer.h"
+#include "TransactionItem.h"
 
 class Command: public HashValueType {
 protected:
-   Comparable* comparablePtr;
-  // std::string code;  //code would S for sell and B for Buy
-  // Item* itemPtr;
+   std::string tokens[6];
+   std::string customerId;          //customer Id
+   std::string itemCode;    //item code
+   std::string description; //command codepublic:
 public:
    /**
     //-------------------------- Default constructor  for class Command  ------------------------------------//
@@ -22,5 +25,7 @@ public:
     */
    virtual Command* create() const = 0;
    
-   virtual void execute(std::string customerId, std::string itemCode, std::string description) =0;
+   virtual void execute(std::string commandString, Store *store) =0;
+   
+   virtual void readInput(std::string commandString);
 };

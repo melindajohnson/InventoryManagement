@@ -107,6 +107,7 @@ bool Hashtable::containsKey(std::string key) const{
       if (entry->key == key) {
          return true;
       }
+      entry = entry->next;
    }
   return false;
 }

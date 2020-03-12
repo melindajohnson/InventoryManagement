@@ -18,3 +18,8 @@ Item* ItemFactory::make_Item(std::string code) const {
    }
    else return nullptr;
 }
+
+
+Item* ItemFactory::buildItemsByFactory(std::string code) const{
+   return make_Item(code);
+}

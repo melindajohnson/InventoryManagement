@@ -18,4 +18,5 @@ public:
    ItemFactory();
    virtual ~ItemFactory();
    Item* make_Item(std::string code) const;
+   Item* buildItemsByFactory(std::string code) const;
 };

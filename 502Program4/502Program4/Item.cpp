@@ -53,7 +53,9 @@ void Item::increaseInventory(){
  decrements the inventory of an  Item Object by 1
  */
 void Item::decreaseInventory(){
-   inventoryCount--;
+   if(inventoryCount > 0){
+      inventoryCount--;
+   }
 }
 
 /**
@@ -73,4 +75,4 @@ void Item::setData(std::string stringCount, std::string description){
 std::ostream& operator<<(std::ostream& out, const Item& obj1) {
    out << obj1.toString();
    return out;
-}
+   }
