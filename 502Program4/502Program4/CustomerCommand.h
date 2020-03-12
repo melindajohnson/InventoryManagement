@@ -3,16 +3,17 @@
 #include <stdio.h>
 #include "Command.h"
 
-class SellCommand: public Command{
+class CustomerCommand: public Command{
    
 private:
    
 public:
+   
    /**
-    //-------------------------- Default constructor  for class SellCommand  ------------------------------------//
-    Create a new SellCommand Object
+    //-------------------------- Default constructor  for class CustomerCommand  ------------------------------------//
+    Create a new CustomerCommand Object
     */
-   SellCommand();
+   CustomerCommand();
    
    /**
     //-------------------------- Parametric constructor  for class Command  ------------------------------------//

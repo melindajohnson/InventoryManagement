@@ -78,8 +78,8 @@ void Store::ProcessTransactions(ifstream &commandfile){
    std::string id;          //customer Id
    std::string itemCode;    //item code
    std::string description; //command code
-                           
-                            //S, 001, S, 1989, Near Mint, Ken Griffey Jr., Upper Deck
+   
+      //S, 001, S, 1989, Near Mint, Ken Griffey Jr., Upper Deck
    while(commandfile.peek() != EOF){  //read command file until eof
       getline(commandfile, input);        //get line by line from command file
       std::string tokens[7];
@@ -100,19 +100,24 @@ void Store::ProcessTransactions(ifstream &commandfile){
       switch(commandCode.at(0))
       {
          case 'S':{
-            //read customer id and find out customer name in the customerData hashtable
+               //read customer id and find out customer name in the customerData hashtable
             Customer *c1 = dynamic_cast<Customer*>(customerHash->getValue(id));
             if(c1!= nullptr){
-            BinarySearchTree *itemTree = dynamic_cast<BinarySearchTree*>(treeHash->getValue(itemCode));
-            Item *ptr = itemManager.buildItemsByFactory(itemCode);
-            if(ptr!= nullptr){
-               ptr->setData(" ", description);
+               BinarySearchTree *itemTree = dynamic_cast<BinarySearchTree*>(treeHash->getValue(itemCode));
+               Item *ptr = itemManager.buildItemsByFactory(itemCode);
+               if(ptr!= nullptr){
+                  ptr->setData(" ", description);
+                  Item *item = dynamic_cast<Item*>(itemTree->retrieve(*ptr));
+                     //increase inventory of the particular object by 1
+                  item->increaseInventory();
+                  TransactionItem *t1 = new TransactionItem("Sell", item);
+                  c1->addTransactions(t1);
+               }
+               else {
+                  std::cout <<"Item does not exist in inventory"<< std::endl;
+               }
             }
-            Item *item = dynamic_cast<Item*>(itemTree->retrieve(*ptr));
-            //increase inventory of the particular object by 1
-            item->increaseInventory();
-            TransactionItem *t1 = new TransactionItem("Sell", item);
-            c1->addTransactions(t1);
+            else { std::cout <<"Customer does not exist"<< std::endl;
             }
             break;
          }
@@ -120,38 +125,45 @@ void Store::ProcessTransactions(ifstream &commandfile){
                //read customer id and find out customer name in the customerData hashtable
             Customer *c1 = dynamic_cast<Customer*>(customerHash->getValue(id));
             if(c1!= nullptr){
-            BinarySearchTree *itemTree = dynamic_cast<BinarySearchTree*>(treeHash->getValue(itemCode));
-            Item *ptr = itemManager.buildItemsByFactory(itemCode);
-            if(ptr!= nullptr){
-               ptr->setData(" ", description);
+               BinarySearchTree *itemTree = dynamic_cast<BinarySearchTree*>(treeHash->getValue(itemCode));
+               Item *ptr = itemManager.buildItemsByFactory(itemCode);
+               if(ptr!= nullptr){
+                  ptr->setData(" ", description);
+                  Item *item = dynamic_cast<Item*>(itemTree->retrieve(*ptr));
+                     //increase inventory of the particular object by 1
+                  item->decreaseInventory();
+                  TransactionItem *t1 = new TransactionItem("Buy", item);
+                  c1->addTransactions(t1);
+               }
+               else {
+                  std::cout <<"Item does not exist in inventory"<< std::endl;
+               }
             }
-            Item *item = dynamic_cast<Item*>(itemTree->retrieve(*ptr));
-               //increase inventory of the particular object by 1
-            item->decreaseInventory();
-            TransactionItem *t1 = new TransactionItem("Buy", item);
-            c1->addTransactions(t1);
+            else { std::cout <<"Customer does not exist"<< std::endl;
             }
             break;
          }
          case 'C':{
-            Customer *c1 = dynamic_cast<Customer*>(customerHash->getValue("001"));
+            Customer *c1 = dynamic_cast<Customer*>(customerHash->getValue(id));
             if(c1!= nullptr){
-            std::cout << *c1 ;
+               std::cout << *c1 ;
+            } else{
+               std::cout <<" Customer does not exist"<< std::endl;
             }
             break;
          }
          case 'D':{
-               //Inorder traversal of the InventoryTree outputs the entire inventory of the store
+               //Displays the entire inventory of the store
             displayInventory(*treeHash);
             break;
          }
          case 'H':{
-               //Inorder traversal of the TransactionTree outputs the entire history of transactions that took place in the store along with the customer details
+               //Displays all the customers along with their  history of transactions
             std::cout << customerTree;
             break;
          }
          default:{
-            std::cout << "Invalid Code." << std::endl;
+            std::cout << "Invalid Code!!" << std::endl;
          }
       }
    }
@@ -166,8 +178,4 @@ void Store::displayInventory(Hashtable& h1){
          std::cout << *item;
       }
    }
-}
-
-void Store::displayAllCustomer(Hashtable& h1){
-   
 }
