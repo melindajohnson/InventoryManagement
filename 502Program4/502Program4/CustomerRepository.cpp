@@ -1,6 +1,6 @@
 
-#include "Customer.h"
-Customer::Customer(std::string name){
+#include "CustomerRepository.h"
+CustomerRepository::CustomerRepository(std::string name){
    customerName = name;
 }
 /**
@@ -10,8 +10,8 @@ Customer::Customer(std::string name){
  Postconditions:  boolean true if the left and right object are the same
  @return boolean true if same or false if not
  */
-bool Customer::operator==(const Comparable& right) const{
-   const Customer &c = static_cast<const Customer &>(right);
+bool CustomerRepository::operator==(const Comparable& right) const{
+   const CustomerRepository &c = static_cast<const CustomerRepository &>(right);
    return (customerName == c.customerName);
 }
 
@@ -22,8 +22,8 @@ bool Customer::operator==(const Comparable& right) const{
  Postconditions:  boolean false if the left and right object are the same
  @return boolean true if different or false if not
  */
-bool Customer::operator!=(const Comparable& right)const{
-   const Customer &c = static_cast<const Customer &>(right);
+bool CustomerRepository::operator!=(const Comparable& right)const{
+   const CustomerRepository &c = static_cast<const CustomerRepository &>(right);
    return !(customerName == c.customerName);
 }
 
@@ -35,9 +35,9 @@ bool Customer::operator!=(const Comparable& right)const{
  Postconditions: boolean true if the left hand side data is smaller than the data on the right hand side
  @return boolean true is left is smaller than right
  */
-bool Customer::operator<(const Comparable& right)const{
+bool CustomerRepository::operator<(const Comparable& right)const{
    
-   const Customer &c = static_cast<const Customer &>(right);
+   const CustomerRepository &c = static_cast<const CustomerRepository &>(right);
    return (customerName < c.customerName);
 }
 
@@ -48,13 +48,13 @@ bool Customer::operator<(const Comparable& right)const{
  Postconditions: boolean true if the left hand side data is larger than the data on the right hand side
  @return boolean true is left is larger than right
  */
-bool Customer::operator>(const Comparable& right)const{
-   const Customer &c = static_cast<const Customer &>(right);
+bool CustomerRepository::operator>(const Comparable& right)const{
+   const CustomerRepository &c = static_cast<const CustomerRepository &>(right);
    return (customerName > c.customerName);
 }
 
 
-std::string Customer::toString()const{
+std::string CustomerRepository::toString()const{
    std::string contents;
    contents = customerName + "\n";
    for (auto it = begin (transactionList); it != end (transactionList); ++it) {
@@ -63,7 +63,7 @@ std::string Customer::toString()const{
    return contents;
 }
 
-void Customer::addTransactions(TransactionItem* transactionItem){
+void CustomerRepository::addTransactions(TransactionEntry* transactionItem){
    transactionList.push_back(transactionItem);
 }
 
@@ -72,7 +72,7 @@ void Customer::addTransactions(TransactionItem* transactionItem){
  //--------------------------Overloaded output operator <<  ------------------------------------//
  
  */
-std::ostream& operator<<(std::ostream& out, const Customer& c) {
+std::ostream& operator<<(std::ostream& out, const CustomerRepository& c) {
    out << c.customerName << std::endl;
    out << "Transactions List " << std::endl;
    for (auto it = begin (c.transactionList); it != end (c.transactionList); ++it) {

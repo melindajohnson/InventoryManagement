@@ -48,7 +48,7 @@ void Store::FillCustomerData(std::ifstream &customerFile){
       getline(customerFile, id, ',');          //get customer id
       customerFile.get();                      //discard space
       getline(customerFile, name, '\n');       //get customer name
-      Customer *c1 = new Customer(name);
+      CustomerRepository *c1 = new CustomerRepository(name);
       myStore->customerHash->insert(id, c1);
       myStore->customerTree.insert(c1);
       

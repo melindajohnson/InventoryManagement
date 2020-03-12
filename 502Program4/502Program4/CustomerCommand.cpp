@@ -18,7 +18,7 @@ Command* CustomerCommand::create() const {
 }
 void CustomerCommand::execute(std::string commandString, StoreRepository *store) {
    readInput(commandString);
-   Customer *c1 = dynamic_cast<Customer*>(store->customerHash->getValue(customerId));
+   CustomerRepository *c1 = dynamic_cast<CustomerRepository*>(store->customerHash->getValue(customerId));
    if(c1!= nullptr){
       std::cout << *c1 ;
    } else{

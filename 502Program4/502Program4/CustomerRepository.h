@@ -13,19 +13,19 @@
 #include "HashValueType.h"
 #include "Comparable.h"
 #include "Item.h"
-#include "TransactionItem.h"
+#include "TransactionEntry.h"
 
-class Customer: public HashValueType, public Comparable {
+class CustomerRepository: public HashValueType, public Comparable {
 private:
    
    std::string customerName;
-   std::vector<TransactionItem*> transactionList ;
+   std::vector<TransactionEntry*> transactionList ;
  
    
    
 public:
    
-   Customer(std::string name);
+   CustomerRepository(std::string name);
    
    /**
     //-------------------------- Overloaded equal to operator ==  ------------------------------------//
@@ -64,11 +64,11 @@ public:
    
    std::string toString()const override;
    
-   void addTransactions(TransactionItem* transactionItem);
+   void addTransactions(TransactionEntry* transactionItem);
    
    /*
     //--------------------------Overloaded output operator <<  ------------------------------------//
     
     */
-   friend std::ostream& operator<<(std::ostream& out, const Customer& c) ;
+   friend std::ostream& operator<<(std::ostream& out, const CustomerRepository& c) ;
 };

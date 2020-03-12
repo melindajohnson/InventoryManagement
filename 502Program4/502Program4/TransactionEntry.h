@@ -3,7 +3,7 @@
 #include <stdio.h>
 #include <vector>
 #include "Item.h"
-class TransactionItem  {
+class TransactionEntry  {
 private:
  
       std::string code;  //code would S for sell and B for Buy
@@ -15,25 +15,25 @@ public:
     //-------------------------- Default constructor  for class TransactionItem  ------------------------------------//
     Create and new TransactionItem Object
     */
-   TransactionItem();
+   TransactionEntry();
    
    /**
     //-------------------------- Parametric constructor  for class TransactionItem  ------------------------------------//
     Create and new TransactionItem Object
     */
-   TransactionItem(std::string code, Item* ptr);
+   TransactionEntry(std::string code, Item* ptr);
    
    /**
     //-------------------------- Destructor  for class TransactionItem  ------------------------------------//
     Destroys object and frees memory allocated by object.
     */
-   virtual ~TransactionItem();
+   virtual ~TransactionEntry();
    
    /*
     //--------------------------Overloaded output operator <<  ------------------------------------//
     
     */
-   friend std::ostream& operator<<(std::ostream& out, const TransactionItem& c);
+   friend std::ostream& operator<<(std::ostream& out, const TransactionEntry& c);
    
    std::string toString()const;
    

@@ -9,7 +9,7 @@
 #include <vector>
 #include "StoreRepository.h"
 #include "CommandFactory.h"
-#include "Customer.h"
+#include "CustomerRepository.h"
 
 class Store{
 private:

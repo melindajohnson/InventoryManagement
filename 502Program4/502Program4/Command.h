@@ -4,8 +4,8 @@
 #include <stdio.h>
 #include <string>
 #include "StoreRepository.h"
-#include "Customer.h"
-#include "TransactionItem.h"
+#include "CustomerRepository.h"
+#include "TransactionEntry.h"
 
 class Command: public HashValueType {
 protected:
