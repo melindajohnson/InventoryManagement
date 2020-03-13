@@ -45,6 +45,7 @@ void SellCommand::execute(std::string commandString, StoreRepository *store){
       if(ptr!= nullptr){
          ptr->setData(" ", description);
          Item *item = dynamic_cast<Item*>(store->itemtree.retrieve(*ptr));
+         delete ptr;
             //increase inventory of the particular object by 1 if inventory count of the item is greater than 0
          if(item!=nullptr){
             if(item->decreaseInventory()){

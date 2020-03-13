@@ -23,6 +23,9 @@ CustomerRepository::CustomerRepository(std::string name){
  Destroys object and frees memory allocated by object.
  */
 CustomerRepository:: ~CustomerRepository(){
+    for (auto it = begin(transactionList); it != end(transactionList); ++it) {
+        delete *it;
+    }
    transactionList.clear();
 }
 

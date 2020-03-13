@@ -47,11 +47,12 @@ void BuyCommand::execute(std::string commandString, StoreRepository *store) {
       if(ptr!= nullptr){
          ptr->setData(" ", description);
          Item *item = dynamic_cast<Item*>(store->itemtree.retrieve(*ptr));
+         delete ptr;
             //increase inventory of the particular object by 1
          if(item != nullptr){
          item->increaseInventory();
          TransactionEntry *t1 = new TransactionEntry("Buy", item);
-         c1->addTransactions(t1);
+         c1->addTransactions(t1);   
       }else {
             std::cout <<"Item does not exist in inventory"<< std::endl;
          }

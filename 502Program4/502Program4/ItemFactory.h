@@ -12,6 +12,7 @@
 #pragma once
 #include <stdio.h>
 #include <string>
+#include <vector>
 #include "Item.h"
 #include "Coin.h"
 #include "ComicBook.h"

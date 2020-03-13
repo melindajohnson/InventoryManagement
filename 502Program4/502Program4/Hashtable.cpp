@@ -9,7 +9,7 @@
 Hashtable::Hashtable(const int buckets){
    totalBuckets = buckets;
    table = new HashNode* [totalBuckets];
-   for (int i = 0; i< totalBuckets; i++) {
+   for (unsigned int i = 0; i< totalBuckets; i++) {
       table[i] = nullptr;
    }
 }
@@ -137,7 +137,7 @@ int Hashtable::getHashIndex(const std::string k) const{
 
    int hashVal = 0;
    
-   for(int i = 0; i<k.length();  i++)
+   for(unsigned int i = 0; i<k.length();  i++)
       hashVal = 37*hashVal+k[i];
    
    hashVal %= totalBuckets;
@@ -154,7 +154,7 @@ int Hashtable::getHashIndex(const std::string k) const{
  Postconditions: The Hashentries inside the hashable are all deallocated and deleted
  */
 void Hashtable::clear(){
-   for (int i = 0; i < totalBuckets; ++i) {
+   for (unsigned int i = 0; i < totalBuckets; ++i) {
       HashNode *entry = table[i];
       while (entry != NULL) {
          HashNode *prev = entry;
@@ -185,7 +185,7 @@ int Hashtable::size() const{
  */
 std::vector<HashValueType*> Hashtable::getContents() const{
    std::vector<HashValueType*> contents;
-   for(int i=0; i< totalBuckets; i++){
+   for(unsigned int i=0; i< totalBuckets; i++){
       HashNode *curr = table[i];
       while(curr != nullptr){
       contents.push_back(table[i]->value);

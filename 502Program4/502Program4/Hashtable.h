@@ -23,9 +23,9 @@ class Hashtable{
 private:
    struct HashNode
    {
-      HashValueType* value;
+      HashValueType* value = NULL;
       std::string key;
-      HashNode* next;
+      HashNode* next =NULL;
    };
    
    HashNode **table;

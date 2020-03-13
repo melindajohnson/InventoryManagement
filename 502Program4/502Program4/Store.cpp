@@ -61,18 +61,6 @@ void Store::FillInventory(std::ifstream &inventoryFile){
          //Set the item with data from the input file
          itemPtr->setData(stringCount, description);
          myStore->itemtree.insert(itemPtr);
-            //create new tree for new itemType and then insert the itemPtr or else just insert item into an already esisting tree
-//         if(myStore->treeHash->containsKey(type)){
-//            BinarySearchTree *tree = dynamic_cast<BinarySearchTree*>(myStore->treeHash->getValue(type));
-//            if(tree!=nullptr){
-//            tree->insert(itemPtr);
-//            }
-//         }else{
-//            BinarySearchTree *tree = new BinarySearchTree;
-//            myStore->treeHash->insert(type, tree);
-//            tree->insert(itemPtr);
-//            myStore->itemtree.insert(itemPtr);
-//         }
       }
       
    }
@@ -108,6 +96,7 @@ void Store::ProcessTransactions(std::ifstream &commandfile){
    std::string commandCode;   //code of command
    std::string commandString; //rest of the description of the command
    CommandFactory  commandFactory;
+   Command* commandPtr = NULL;
    while(commandfile.peek() != EOF){  //read command file until eof
       getline(commandfile, input);
       commandCode = input.at(0);
@@ -115,12 +104,14 @@ void Store::ProcessTransactions(std::ifstream &commandfile){
          commandString = input.substr(3, input.size());
       }
       //based on the commandCode,a dummy command object is created
-      Command *commandPtr = commandFactory.buildCommandsByFactory(commandCode);
+      commandPtr = commandFactory.make_Command(commandCode);
       //the command is then executed
       if(commandPtr!= nullptr){
          commandPtr->execute(commandString, myStore);
+         delete commandPtr;
       } else {
          std::cout << "Invalid Code!!" << std::endl;
       }
    }
+
 }

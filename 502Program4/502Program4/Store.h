@@ -24,7 +24,7 @@
 class Store{
 private:
    
-   StoreRepository *myStore; 
+   StoreRepository *myStore = nullptr; 
    /**
     //-------------------------- FillInventory ------------------------------------//
     Preconditions: A store object is created

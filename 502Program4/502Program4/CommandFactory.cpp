@@ -27,7 +27,11 @@ CommandFactory::CommandFactory() {
  Destroys object and frees memory allocated by object.
  */
 CommandFactory:: ~CommandFactory() {
-   commandHash->clear();
+    std::vector<HashValueType*> commandList = commandHash->getContents();
+    for (auto it = begin(commandList); it != end(commandList); ++it) {
+        delete *it;
+    }
+    delete commandHash;
 }
 /**
  //-------------------------- make_Command method for class CommandFactory  ------------------------------------//
@@ -39,11 +43,4 @@ Command* CommandFactory::make_Command(std::string code) const {
       return ptr->create();
    }
    else return nullptr;
-}
-/**
- //-------------------------- buildCommandsByFactory method for class CommandFactory  ------------------------------------//
- Method to make a dummy command object
- */
-Command* CommandFactory::buildCommandsByFactory(std::string code) const{
-    return make_Command(code);
 }

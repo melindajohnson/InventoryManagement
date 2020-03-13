@@ -15,7 +15,11 @@ ItemFactory::ItemFactory() {
  Destroys object and frees memory allocated by object.
  */
  ItemFactory:: ~ItemFactory() {
-       itemsHash->clear();
+     std::vector<HashValueType*> itemList = itemsHash->getContents();
+     for (auto it = begin(itemList); it != end(itemList); ++it) {
+         delete* it;
+     }
+     delete itemsHash;
 }
 /**
  //-------------------------- make_Item method for class ItemFactory  ------------------------------------//

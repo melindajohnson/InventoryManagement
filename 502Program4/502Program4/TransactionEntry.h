@@ -14,7 +14,7 @@ class TransactionEntry  {
 private:
  
       std::string code;  //code would S for sell and B for Buy
-      Item* itemPtr;
+      Item* itemPtr = nullptr;
   
    
 public:

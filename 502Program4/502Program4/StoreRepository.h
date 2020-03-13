@@ -4,8 +4,8 @@
  Created by Melinda Stannah Stanley Jothiraj on 02/25/2020.
  Student number- 1978413
    The StoreRepository class contains
-      a binary search trees to holds CustomerRepository
-      a hashtable for items called the tree hash which contains a hashtable of pointers to Item trees which inturn have item pointers in them
+      a binary search trees to point to CustomerRepository objects
+      a binary search trees to point to Item objects
       a hashtable for CustomerRepository called the cutsomerTree
       a Item factory to create Items whenever desired
  ---------------------------------------------------------------------------
@@ -28,9 +28,8 @@ const static int totalCustomers = 101;
 class StoreRepository{
 public:
    
-   BinarySearchTree itemtree;
+   BinarySearchTree itemtree; // BinarySearchTree whose nodes point to items
    BinarySearchTree customerTree; // BinarySearchTree whose nodes point to customerTransactions
-//   Hashtable *treeHash = new Hashtable(totalBuckets); //Hashtable for inserting item into respective item tree
    Hashtable *customerHash= new Hashtable(totalCustomers);//Hashtable for filling with customer data
    ItemFactory  itemFactory;
    

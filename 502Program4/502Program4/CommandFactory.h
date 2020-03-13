@@ -12,6 +12,7 @@
 
 #include <stdio.h>
 #include <string>
+#include <vector>
 #include "Command.h"
 #include "SellCommand.h"
 #include "BuyCommand.h"
@@ -42,9 +43,4 @@ public:
     Make a dummy command object based on the code from the command file
     */
    Command* make_Command(std::string code) const;
-   /**
-    //-------------------------- buildCommandsByFactory method for class CommandFactory  ------------------------------------//
-    Method to make a dummy command object
-    */
-   Command* buildCommandsByFactory(std::string code) const;
 };
