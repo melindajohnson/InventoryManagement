@@ -1,4 +1,17 @@
 /**
+ Problem Statement:
+ A local collectibles store wishes to automate their inventory tracking system. Currently there are 3 types of items to be tracked which are,
+ •   Coins
+ •   Comic books
+ •   Sports cards
+ Five types of actions have to be also considered in the system:
+ •   Sell: removes an item from the inventory
+ •   Buy: adds an item to the inventory
+ •   Display: outputs the entire inventory of the store, including the number of each item in inventory in the order first coins, then comic books and then sports cards.
+ •   Customer: outputs all of the transactions for a customer, including the item (in chronological order)
+ •   History: outputs the history for every customer, with the customers in alphabetical order.
+ The program must initialize the contents of the inventory from a file, the customer list from another file, and process an arbitrary sequence of commands from a third file.
+
  Assumptions:
 -- The inventoryfile has correct formatting, but the data could be invalid.
 -- The customerfile has correct formatting, but the data could be invalid(duplicates)
