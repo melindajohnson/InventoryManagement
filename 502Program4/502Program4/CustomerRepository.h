@@ -1,8 +1,8 @@
 /*
- Customer.h
+ CustomerRepository.h
  Created by Melinda Stannah Stanley Jothiraj on 02/25/2020.
  Student number- 1978413
- --The Customer class contains one private data member customer name;
+ --The CustomerRepository class contains the private data member customer name and a vector of TransactionEntry
  --This class is extensibe and could include further details of a customer in the future
  ---------------------------------------------------------------------------
  */
@@ -24,8 +24,17 @@ private:
    
    
 public:
-   
+   /**
+    //-------------------------- Default constructor  for class CustomerRepository  ------------------------------------//
+    Create and new CustomerRepository Object with parameter name
+    */
    CustomerRepository(std::string name);
+   
+   /**
+    //-------------------------- Destructor  for class CustomerRepository  ------------------------------------//
+    Destroys object and frees memory allocated by object.
+    */
+   virtual ~CustomerRepository();
    
    /**
     //-------------------------- Overloaded equal to operator ==  ------------------------------------//
@@ -62,13 +71,24 @@ public:
     */
    bool operator>(const Comparable& right)const override;
    
+   /**
+    *  Output a textual representation of this instance to the output stream.
+    *  @pre This instance must be initialized.
+    *  @post A textual representation of this instance is appended to a string and returned
+    *  @return A textual representation of this instance is appended to a string
+    */
    std::string toString()const override;
    
+   /**
+     Adds new TransactionEntry to the TransactionList vector
+    */
    void addTransactions(TransactionEntry* transactionItem);
    
-   /*
-    //--------------------------Overloaded output operator <<  ------------------------------------//
-    
+   /**
+    *  Output a textual representation of this instance to the output stream.
+    *  @pre This instance must be initialized.
+    *  @post A textual representation of this instance is appended to a output stream. and returned
+    *  @return A textual representation of this instance is appended to a output stream.
     */
    friend std::ostream& operator<<(std::ostream& out, const CustomerRepository& c) ;
 };

@@ -1,8 +1,31 @@
-
+/*
+ CustomerRepository.h
+ Created by Melinda Stannah Stanley Jothiraj on 02/25/2020.
+ Student number- 1978413
+ --The CustomerRepository class contains the private data member customer name and a vector of TransactionEntry
+ --This class is extensibe and could include further details of a customer in the future
+ ---------------------------------------------------------------------------
+ */
 #include "CustomerRepository.h"
+
+
+/**
+ //-------------------------- Default constructor  for class CustomerRepository  ------------------------------------//
+ Create and new CustomerRepository Object with parameter name
+ */
 CustomerRepository::CustomerRepository(std::string name){
    customerName = name;
 }
+
+
+/**
+ //-------------------------- Destructor  for class CustomerRepository  ------------------------------------//
+ Destroys object and frees memory allocated by object.
+ */
+CustomerRepository:: ~CustomerRepository(){
+   transactionList.clear();
+}
+
 /**
  //-------------------------- Overloaded equal to operator ==  ------------------------------------//
  Determines if two Item are equal based on  data members
@@ -53,31 +76,40 @@ bool CustomerRepository::operator>(const Comparable& right)const{
    return (customerName > c.customerName);
 }
 
-
-std::string CustomerRepository::toString()const{
-   std::string contents;
-   contents = customerName + "\n";
-   for (auto it = begin (transactionList); it != end (transactionList); ++it) {
-      contents = contents + (*it)->toString() + "\n";
-   }
-   return contents;
-}
-
+/**
+ Adds new TransactionEntry to the TransactionList vector
+ */
 void CustomerRepository::addTransactions(TransactionEntry* transactionItem){
    transactionList.push_back(transactionItem);
 }
 
+/**
+ *  Output a textual representation of this instance to the output stream.
+ *  @pre This instance must be initialized.
+ *  @post A textual representation of this instance is appended to a string and returned
+ *  @return A textual representation of this instance is appended to a string
+ */
+std::string CustomerRepository::toString()const{
+   std::string contents;
+   contents = "Customer name: " +customerName + "\n";
+   if(transactionList.empty()){
+      contents = contents + "No Transactions \n";
+      return contents;
+   }
+   for (auto it = begin (transactionList); it != end (transactionList); ++it) {
+      contents = contents + (*it)->toString();
+   }
+   return contents;
+}
 
-/*
- //--------------------------Overloaded output operator <<  ------------------------------------//
- 
+/**
+ *  Output a textual representation of this instance to the output stream.
+ *  @pre This instance must be initialized.
+ *  @post A textual representation of this instance is appended to a output stream. and returned
+ *  @return A textual representation of this instance is appended to a output stream.
  */
 std::ostream& operator<<(std::ostream& out, const CustomerRepository& c) {
-   out << c.customerName << std::endl;
-   out << "Transactions List " << std::endl;
-   for (auto it = begin (c.transactionList); it != end (c.transactionList); ++it) {
-      out << *(*it);
-   }
+   out << c.toString();
    return out;
    
 }

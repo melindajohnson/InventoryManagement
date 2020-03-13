@@ -1,4 +1,14 @@
 
+/*
+ ComicBook.h
+ Created by Melinda Stannah Stanley Jothiraj on 02/25/2020.
+ Student number- 1978413
+ ComicBook class:
+ The ComicBook class inherits from the Class Item and overloads its virtual methods
+ There is one additional data members a title of type string
+ The Class allows for comparison of 2 items based on their data members in a particular order.
+ */
+
 #include "ComicBook.h"
 /**
  //-------------------------- Default constructor  for class ComicBook  ------------------------------------//
@@ -24,10 +34,14 @@ ComicBook:: ~ComicBook(){
  @return boolean true if same or false if not
  */
 bool ComicBook::operator==(const Comparable& right) const{
-   const ComicBook &c = static_cast<const ComicBook &>(right);
-   return (name == c.name && grade ==c.grade && year ==c.year && publisher == c.publisher);
+   if(Item::operator==(right)){
+      const ComicBook &c = static_cast<const ComicBook &>(right);
+      return (name == c.name && grade ==c.grade && year ==c.year && publisher == c.publisher);
+   } else {
+      return false;
+   }
 }
-  
+
 /**
  //-------------------------- Overloaded not equal to operator !=  ------------------------------------//
  Determines if two Item are equal based on  data members
@@ -36,10 +50,14 @@ bool ComicBook::operator==(const Comparable& right) const{
  @return boolean true if different or false if not
  */
 bool ComicBook::operator!=(const Comparable& right)const{
-   const ComicBook &c = static_cast<const ComicBook &>(right);
-   return !(name == c.name && grade == c.grade && year ==c.year && publisher == c.publisher);
+   if(Item::operator==(right)){
+      const ComicBook &c = static_cast<const ComicBook &>(right);
+      return !(name == c.name && grade == c.grade && year ==c.year && publisher == c.publisher);
+   } else {
+      return false;
+   }
 }
-   
+
 /**
  //-------------------------- Overloaded lesser than operator <------------------------------------//
  Determines if the item object on the left hand side is smaller than the Item object on right hand side based on name of the item
@@ -48,21 +66,26 @@ bool ComicBook::operator!=(const Comparable& right)const{
  @return boolean true is left is smaller than right
  */
 bool ComicBook::operator<(const Comparable& right)const{
-   const ComicBook &c = static_cast<const ComicBook &>(right);
-   if(publisher < c.publisher) return true;
-   else if(publisher == c.publisher){
-      if (name < c.name) return true;
-      else if(name == c.name){
-         if(year < c.year) return true;
-         else if(year == c.year){
-             if(grade < c.grade) return true;
-             else if(grade == c.grade) return false;
+   bool result = false;
+   if(Item::operator==(right)){
+      const ComicBook &c = static_cast<const ComicBook &>(right);
+      if(publisher < c.publisher) result = true;
+      else if(publisher == c.publisher){
+         if (name < c.name) result =  true;
+         else if(name == c.name){
+            if(year < c.year) result =  true;
+            else if(year == c.year){
+               if(grade < c.grade) result =  true;
+            }
          }
       }
+      return result;
+      
    }
-   return false;
+   else {
+      return Item::operator<(right);
+   }
 }
-  
 
 /**
  //-------------------------- Overloaded greater than operator >  ------------------------------------//
@@ -72,19 +95,24 @@ bool ComicBook::operator<(const Comparable& right)const{
  @return boolean true is left is larger than right
  */
 bool ComicBook::operator>(const Comparable& right)const{
+   bool result = false;
+   if(Item::operator==(right)){
    const ComicBook &c = static_cast<const ComicBook &>(right);
-   if(publisher > c.publisher) return true;
+   if(publisher > c.publisher) result = true;
    else if(publisher == c.publisher){
-      if (name > c.name) return true;
+      if (name > c.name) result = true;
       else if(name == c.name){
-         if(year > c.year) return true;
+         if(year > c.year) result = true;
          else if(year == c.year){
-            if(grade > c.grade) return true;
-            else if(grade == c.grade) return false;
+            if(grade > c.grade) result = true;
          }
       }
    }
-   return false;
+   return result;
+   }
+   else {
+      return Item::operator>(right);
+   }
 }
 
 /**
@@ -117,7 +145,8 @@ void ComicBook::setData(std::string stringCount, std::string description){
    grade = tokens[1];
    name = tokens[2];
    publisher = tokens[3];
-
+   type = "ComicBook";
+   
 }
 /**
  *  Output a textual representation of this instance to the output stream.

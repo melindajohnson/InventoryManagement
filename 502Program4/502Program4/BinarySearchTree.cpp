@@ -8,7 +8,6 @@
  A int totalCharacters that holds the number of unique characters in the tree
  Struct Node: The Node holds a
  pointer item to the comparable object
- int count which holds the number of times a particular character is found in the input file
  Node left points to the left child and
  Node right points to the right child
  Includes additional features:
@@ -25,9 +24,7 @@
 
 
 #include "BinarySearchTree.h"
-int BinarySearchTree::isEmpty(){
-   return (totalCharacters==0);
-}
+
 
 /*
  //-------------------------- Default constructor for class BinarySearchTree ------------------------------------//
@@ -187,8 +184,7 @@ BinarySearchTree::BSTNode* BinarySearchTree::deepCopy(BSTNode* subTreePtr) {
       Comparable *newItem; //Create a new Comparable
       //dereference the Comparable pointer of the subTreePtr and setting it to a new Comparable
       newItem = subTreePtr->item;
-      newTreePtr->item =newItem; //-------------------- //change made here
-     // newTreePtr->count = subTreePtr->count;
+      newTreePtr->item =newItem;
       newTreePtr->left = deepCopy(subTreePtr->left);
       newTreePtr->right = deepCopy(subTreePtr->right);
    }
@@ -233,7 +229,6 @@ bool BinarySearchTree::insertHelper(BSTNode*& root, Comparable* item) {
    else if (*item > * root->item)
       insertHelper(root->right, item); //Recursively calls the roots right if the comparable item is greater than the calling comparable item
    else if (*item == *root->item) {
-     //root->item->++;  //increments count if the item already exists in the BinarySearchTree
       delete item;   //The comparable pointer to be inserted is deallocated since it is not inserted in the tree
       return false;
    }
@@ -372,7 +367,6 @@ void BinarySearchTree::inorderTraversal(std::ostream& output, const BSTNode* sub
    }
    output << *subTreePtr->item;
    output << " ";
-   //output << subTreePtr->count;
    output << std::endl;
    
    if (subTreePtr->right != nullptr)
@@ -401,4 +395,13 @@ bool BinarySearchTree::identicalTrees(BSTNode* a, BSTNode* b) const
    return 0;
    
     //if (*a->item == *b->item && a->count == b->count && identicalTrees(a->left, b->left)
+}
+
+/*
+ //-------------------------- isEmpty method for class BinarySearchTree ------------------------------------//
+ Preconditions: A BinarySearchTree object is created
+ Postconditions: The total number of nodes in the tree is returned
+ */
+int BinarySearchTree::isEmpty() const{
+   return (totalCharacters==0);
 }

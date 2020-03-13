@@ -25,10 +25,14 @@ SportsCard:: ~SportsCard(){
 
 
 bool SportsCard::operator==(const Comparable& right) const{
-   const SportsCard &c = static_cast<const SportsCard &>(right);
-   return (name == c.name && grade ==c.grade && year ==c.year && manufacturer == c.manufacturer);
+   if(Item::operator==(right)){
+      const SportsCard &c = static_cast<const SportsCard &>(right);
+      return (name == c.name && grade ==c.grade && year ==c.year && manufacturer == c.manufacturer);
+   } else {
+      return false;
+   }
 }
-  
+
 /**
  //-------------------------- Overloaded not equal to operator !=  ------------------------------------//
  Determines if two Item are equal based on  data members
@@ -37,11 +41,15 @@ bool SportsCard::operator==(const Comparable& right) const{
  @return boolean true if different or false if not
  */
 bool SportsCard::operator!=(const Comparable& right)const{
-   const SportsCard &c = static_cast<const SportsCard &>(right);
-   return !(name == c.name && grade ==c.grade && year ==c.year && manufacturer == c.manufacturer);
+   if(Item::operator==(right)){
+      const SportsCard &c = static_cast<const SportsCard &>(right);
+      return !(name == c.name && grade ==c.grade && year ==c.year && manufacturer == c.manufacturer);
+   } else {
+      return false;
+   }
 }
 
-  
+
 /**
  //-------------------------- Overloaded lesser than operator <------------------------------------//
  Determines if the item object on the left hand side is smaller than the Item object on right hand side based on name of the item
@@ -50,21 +58,25 @@ bool SportsCard::operator!=(const Comparable& right)const{
  @return boolean true is left is smaller than right
  */
 bool SportsCard::operator<(const Comparable& right)const{
-   const SportsCard &c = static_cast<const SportsCard &>(right);
-   if(name < c.name) return true;
-   else if(name == c.name){
-      if (year < c.year) return true;
-      else if(year == c.year){
-         if(manufacturer < c.manufacturer) return true;
-         else if(manufacturer == c.manufacturer){
-            if(grade < c.grade) return true;
-            else if(grade == c.grade) return false;
+   bool result = false;
+   if(Item::operator==(right)){
+      const SportsCard &c = static_cast<const SportsCard &>(right);
+      if(name < c.name) result = true;
+      else if(name == c.name){
+         if (year < c.year) result = true;
+         else if(year == c.year){
+            if(manufacturer < c.manufacturer) result = true;
+            else if(manufacturer == c.manufacturer){
+               if(grade < c.grade) result = true;
+            }
          }
-      }
+      } return result;
    }
-   return false;
+   else {
+      return Item::operator<(right);
+   }
 }
-   
+
 
 /**
  //-------------------------- Overloaded greater than operator >  ------------------------------------//
@@ -74,19 +86,24 @@ bool SportsCard::operator<(const Comparable& right)const{
  @return boolean true is left is larger than right
  */
 bool SportsCard::operator>(const Comparable& right)const{
-   const SportsCard &c = static_cast<const SportsCard &>(right);
-   if(name > c.name) return true;
-   else if(name == c.name){
-      if (year > c.year) return true;
-      else if(year == c.year){
-         if(manufacturer > c.manufacturer) return true;
-         else if(manufacturer == c.manufacturer){
-            if(grade > c.grade) return true;
-            else if(grade == c.grade) return false;
+   bool result = false;
+   if(Item::operator==(right)){
+      const SportsCard &c = static_cast<const SportsCard &>(right);
+      if(name > c.name) return true;
+      else if(name == c.name){
+         if (year > c.year) return true;
+         else if(year == c.year){
+            if(manufacturer > c.manufacturer) return true;
+            else if(manufacturer == c.manufacturer){
+               if(grade > c.grade) return true;
+               else if(grade == c.grade) return false;
+            }
          }
-      }
+      } return result;
    }
-   return false;
+   else {
+      return Item::operator>(right);
+   }
 }
 
 /**
@@ -118,7 +135,7 @@ void SportsCard::setData(std::string stringCount, std::string description){
    grade = tokens[1];
    name = tokens[2];
    manufacturer = tokens[3];
-   
+   type = "SportsCard";
 }
 /**
  *  Output a textual representation of this instance to the output stream.

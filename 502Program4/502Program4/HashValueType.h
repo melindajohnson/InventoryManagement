@@ -2,8 +2,8 @@
  HashValueType.h
  Created by Melinda Stannah Stanley Jothiraj on 02/25/2020.
  Student number- 1978413
- --The HashValueType class is an abstract class
- --Item class and Customer class inherit from HashValueType class 
+ --The HashValueType class is a base class and
+   Item class, Binary Search Tree Class and Customer class inherit from HashValueType class 
  ---------------------------------------------------------------------------
  */
 
@@ -18,7 +18,7 @@ public:
     */
    HashValueType();
    /**
-    //-------------------------- Destructor  for class Hashtable  ------------------------------------//
+    //-------------------------- Destructor  for class HashValueType  ------------------------------------//
     Destroys object and frees memory allocated by object.
     */
    virtual ~HashValueType();

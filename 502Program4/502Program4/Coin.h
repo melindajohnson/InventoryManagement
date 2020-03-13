@@ -6,9 +6,6 @@
  Coin class:
  The coin class inherits from the Class Item and overloads its virtual methods
  There are no additional data members
- The Class allows for comparison of 2 items based on their data members in a particular order.
- Assumptions:
- -- The class has a default constructor, destructor and an assignment operator
  */
 #pragma once
 #include <stdio.h>
@@ -77,7 +74,7 @@ public:
    void setData(std::string stringCount, std::string description) override ;
    
    /**
-    *  Output a textual representation of this instance to the output stream.
+    *  Output a textual representation of this instance to a string
     *  @pre This instance must be initialized.
     *  @post A textual representation of this instance is appended to a string and returned
     *  @return A textual representation of this instance is appended to a string
@@ -86,12 +83,18 @@ public:
    
    
    /**
-    *  Output a textual representation of this instance to the output stream.
+    *  Output a textual representation of this instance to a string
     *  @pre This instance must be initialized.
     *  @post A textual representation of this instance is appended to a string and returned
     *  @return A textual representation of this instance is appended to a string
     */
    virtual std::string toStringWithoutCount()const override;
    
-    friend std::ostream& operator<<(std::ostream& out, const Coin& obj1) ;
+   /**
+    *  Output a textual representation of this instance to the output stream
+    *  @pre This instance must be initialized.
+    *  @post A textual representation of this instance is appended to a output stream and returned
+    *  @return A textual representation of this instance is appended to output stream
+    */
+   friend std::ostream& operator<<(std::ostream& out, const Coin& obj1) ;
 };

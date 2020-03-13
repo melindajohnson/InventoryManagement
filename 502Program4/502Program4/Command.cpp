@@ -1,4 +1,16 @@
 
+/*
+ Command.cpp
+ Created by Melinda Stannah Stanley Jothiraj on 11/27/19.
+ Student number- 1978413
+ Command class: is a Abstract class that has 
+ some protected strings
+ a create method to create dummy command objects
+ a execute method to execute the right command
+ a read input method that reads from the input command file
+ ---------------------------------------------------------------------------
+ */
+
 #include "Command.h"
 
 /**
@@ -8,7 +20,17 @@
 Command::Command(){
    
 }
-
+/**
+ //-------------------------- Destructor for class Command  ------------------------------------//
+ Destroys object and frees memory allocated by object.
+ */
+Command:: ~Command(){
+   
+}
+/**
+ //-------------------------- readInput method  for class Command  ------------------------------------//
+ Reads from the input command file and sets the protected data memebers
+ */
 void Command::readInput(std::string commandString){
    std::stringstream  data(commandString);
    std::string line;

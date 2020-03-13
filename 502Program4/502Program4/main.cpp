@@ -1,4 +1,15 @@
+/**
+ Assumptions:
+-- The inventoryfile has correct formatting, but the data could be invalid.
+-- The customerfile has correct formatting, but the data could be invalid(duplicates)
+-- The commandFile has correct formatting, but the data could be invalid i.e not available or error codes
 
+ErroHandling:
+-- In the inventoryfile in case of invalid code, the line is skipped and file reading continues
+-- In the customerfile in case of invalid code, the line is skipped and file reading continues
+-- In the commandFile in case of invalid code, error messages are printed for incorrect data and then file reading continues
+---------------------------------------------------------------------------
+*/
 #include <iostream>
 #include <string>
 #include <fstream>

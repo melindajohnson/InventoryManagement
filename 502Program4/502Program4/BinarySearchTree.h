@@ -8,7 +8,6 @@ BinarySearchTree.h
  A int totalCharacters that holds the number of unique characters in the tree
  Struct Node: The Node holds a
  pointer item to the comparable object
- int count which holds the number of times a particular character is found in the input file
  Node left points to the left child and
  Node right points to the right child
  Includes additional features:
@@ -46,9 +45,108 @@ private:
    BSTNode* rootPtr; //pointer to the root Node of the SearchTree
    int totalCharacters = 0;  //total numbers of Nodes in the SearchTree
    
+   
+      //-------------------------- Private Helper methods  -------------------------------------------
+   
+   /*
+    //-------------------------- isEmpty method for class BinarySearchTree ------------------------------------//
+    Preconditions: A BinarySearchTree object is created
+    Postconditions: The total number of nodes in the tree is returned
+    */
+   int isEmpty() const;
+   
+   /*
+    //-------------------------- Deep Copy Helper method ------------------------------------//
+    Preconditions: The subTreePtr points to a nullPtr  or a Node with left and right subtrees
+    Postconditions: The newTreePtr point to a copy of the parametric new Object containing new copies of its left and right subtree along with a deep copy of item*
+    @return Node pointing to a new copy of the subTreePtr and its child nodes
+    */
+   BSTNode* deepCopy(BSTNode* subTreePtr);
+   
+   /*
+    //--------------------------Clear method ------------------------------------//
+    Preconditions: The subTreePtr points to a nullPtr  or a Node with left and right subtrees
+    Postconditions: The subtree pointers and its left and right subtrees are deallocated and frees the memory
+    */
+   void clear(BSTNode* subTreePtr);
+   
+   /*
+    //--------------------------Insert helper method  ------------------------------------//
+    Preconditions: The root points to a subTree in the SearchTree containing a number of nodes in each of its left and right Subtree
+    Postconditions: Inserts a Comparable into the tree and transfers ownership of its memory to the tree
+    or increments the count if it is already exists in the tree in which case the Comparable pointer is deallocated
+    @return false if the Comparable is found and not inserted, true if inserted succesfully
+    */
+   bool insertHelper(BSTNode*& root, Comparable* item);
+   
+   /*
+    //--------------------------DeleteNode method  ------------------------------------//
+    Preconditions: The root points to a subtree containing a number of nodes in each of its left and right Subtree
+    Postconditions:  Removes one occurrence of a Comparable from the tree. If it is the last occurrence the node is removed.
+    @return false if the Comparable is not found and true is removal is successful
+    */
+   bool deleteNode(BSTNode*& root, const Comparable& key);
+   
+   /*
+    //--------------------------DeleteRoot method  ------------------------------------//
+    Preconditions: The root points to a subtree containing a number of nodes in each of its left and right Subtree
+    Postconditions: If the root has zero children, the node is deleted
+    If the root has one child, the node is deleted and replaced with a child that exists).
+    If the node root has two children, a replacement item to placed in the node.
+    This replacement item used is the smallest descendant of the right child which is done in the findAndDeleteMostLeft() method
+    */
+   void deleteRoot(BSTNode*& root);
+   
+   /*
+    //--------------------------findAndDeleteMostLeft method  ------------------------------------//
+    Preconditions: The root points to a subtree containing two child Nodes and is not a nullPtr
+    Postconditions: A replacement item is found at the left most of the root
+    @return A pointer to a Comparable object
+    */
+   Comparable* findAndDeleteMostLeft(BSTNode*& root);
+   
+   /*
+    //--------------------------retrieveHelper method  ------------------------------------//
+    Preconditions:  The subTreePtr points to a Node containing a number of nodes in each of its left and right Subtree
+    Postconditions: Finds a Comparable in the tree using the Comparable object key .
+    @return nullptr if not found or a comparable pointer if located in the tree
+    */
+   Comparable* retrieveHelper(BSTNode* subTreePtr, const Comparable& key) const;
+   
+   /*
+    //--------------------------searchForNode method  ------------------------------------//
+    Preconditions:  The subTreePtr points to a Node containing a number of nodes in each of its left and right Subtree
+    Postconditions: Finds a Node containing the pointer to the Comparable object key .
+    @return nullptr if not found or a Node pointer if located in the tree
+    */
+   BSTNode* searchForNode(BSTNode* subTreePtr, const Comparable& key) const;
+   
+   /*
+    //--------------------------HeightHelper method  ------------------------------------//
+    Preconditions: The subTreePtr points to a Node containing a number of nodes in each of its left and right Subtree
+    Postconditions: The height of the node storing the Comparable in the tree is found out
+    @return -1 if the Comparable is not found or if found the height of the tree is returned with leaf nodes having 0 as height
+    */
+   int heightHelper(BSTNode* subTreePtr) const;
+   
+   /**
+    //--------------------------Inorder traversal method  ------------------------------------//
+    Preconditions: The subTreePtr points to a SearchTree containing a number of nodes in each of its left and right Subtree
+    Postconditions: Prints the contents of the Search Tree in two vector using inorder traversal
+    */
+   void inorderTraversal(std::ostream& output, const BSTNode* subTreePtr) const;
+   
+   /*
+    //--------------------------identicalTrees method  ------------------------------------//
+    Preconditions: The Node a and Node b points to two SearchTree containing a number of nodes in each of its left and right Subtree
+    Postconditions: Checks if both the trees have same item, same count and if its left and right subtrees are also the same structuraly
+    @return true if identical or false if not
+    */
+   bool identicalTrees(BSTNode* a, BSTNode* b) const;
+   
 public:
    
-   int isEmpty();
+   
    /*
     //-------------------------- Default constructor for class Search Tree ------------------------------------//
     Preconditions: None
@@ -142,96 +240,6 @@ public:
     */
    int height(const Comparable& key) const;
    
-      //-------------------------- Private Helper methods  -------------------------------------------
-   
-   
-   /*
-    //-------------------------- Deep Copy Helper method ------------------------------------//
-    Preconditions: The subTreePtr points to a nullPtr  or a Node with left and right subtrees
-    Postconditions: The newTreePtr point to a copy of the parametric new Object containing new copies of its left and right subtree along with a deep copy of item*
-    @return Node pointing to a new copy of the subTreePtr and its child nodes
-    */
-   BSTNode* deepCopy(BSTNode* subTreePtr);
-   
-   /*
-    //--------------------------Clear method ------------------------------------//
-    Preconditions: The subTreePtr points to a nullPtr  or a Node with left and right subtrees
-    Postconditions: The subtree pointers and its left and right subtrees are deallocated and frees the memory
-    */
-   void clear(BSTNode* subTreePtr);
-   
-   /*
-    //--------------------------Insert helper method  ------------------------------------//
-    Preconditions: The root points to a subTree in the SearchTree containing a number of nodes in each of its left and right Subtree
-    Postconditions: Inserts a Comparable into the tree and transfers ownership of its memory to the tree
-    or increments the count if it is already exists in the tree in which case the Comparable pointer is deallocated
-    @return false if the Comparable is found and not inserted, true if inserted succesfully
-    */
-   bool insertHelper(BSTNode*& root, Comparable* item);
-   
-   /*
-    //--------------------------DeleteNode method  ------------------------------------//
-    Preconditions: The root points to a subtree containing a number of nodes in each of its left and right Subtree
-    Postconditions:  Removes one occurrence of a Comparable from the tree. If it is the last occurrence the node is removed.
-    @return false if the Comparable is not found and true is removal is successful
-    */
-   bool deleteNode(BSTNode*& root, const Comparable& key);
-   
-   /*
-    //--------------------------DeleteRoot method  ------------------------------------//
-    Preconditions: The root points to a subtree containing a number of nodes in each of its left and right Subtree
-    Postconditions: If the root has zero children, the node is deleted
-    If the root has one child, the node is deleted and replaced with a child that exists).
-    If the node root has two children, a replacement item to placed in the node.
-    This replacement item used is the smallest descendant of the right child which is done in the findAndDeleteMostLeft() method
-    */
-   void deleteRoot(BSTNode*& root);
-   
-   /*
-    //--------------------------findAndDeleteMostLeft method  ------------------------------------//
-    Preconditions: The root points to a subtree containing two child Nodes and is not a nullPtr
-    Postconditions: A replacement item is found at the left most of the root
-    @return A pointer to a Comparable object
-    */
-   Comparable* findAndDeleteMostLeft(BSTNode*& root);
-   
-   /*
-    //--------------------------retrieveHelper method  ------------------------------------//
-    Preconditions:  The subTreePtr points to a Node containing a number of nodes in each of its left and right Subtree
-    Postconditions: Finds a Comparable in the tree using the Comparable object key .
-    @return nullptr if not found or a comparable pointer if located in the tree
-    */
-    Comparable* retrieveHelper(BSTNode* subTreePtr, const Comparable& key) const;
-   
-   /*
-    //--------------------------searchForNode method  ------------------------------------//
-    Preconditions:  The subTreePtr points to a Node containing a number of nodes in each of its left and right Subtree
-    Postconditions: Finds a Node containing the pointer to the Comparable object key .
-    @return nullptr if not found or a Node pointer if located in the tree
-    */
-   BSTNode* searchForNode(BSTNode* subTreePtr, const Comparable& key) const;
-   
-   /*
-    //--------------------------HeightHelper method  ------------------------------------//
-    Preconditions: The subTreePtr points to a Node containing a number of nodes in each of its left and right Subtree
-    Postconditions: The height of the node storing the Comparable in the tree is found out
-    @return -1 if the Comparable is not found or if found the height of the tree is returned with leaf nodes having 0 as height
-    */
-   int heightHelper(BSTNode* subTreePtr) const;
-   
-   /**
-    //--------------------------Inorder traversal method  ------------------------------------//
-    Preconditions: The subTreePtr points to a SearchTree containing a number of nodes in each of its left and right Subtree
-    Postconditions: Prints the contents of the Search Tree in two vector using inorder traversal
-    */
-   void inorderTraversal(std::ostream& output, const BSTNode* subTreePtr) const;
-   
-   /*
-    //--------------------------identicalTrees method  ------------------------------------//
-    Preconditions: The Node a and Node b points to two SearchTree containing a number of nodes in each of its left and right Subtree
-    Postconditions: Checks if both the trees have same item, same count and if its left and right subtrees are also the same structuraly
-    @return true if identical or false if not
-    */
-   bool identicalTrees(BSTNode* a, BSTNode* b) const;
+     
    
 };

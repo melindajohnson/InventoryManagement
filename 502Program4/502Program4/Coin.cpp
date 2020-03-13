@@ -1,6 +1,17 @@
+/*
+ Coin.h
+ Created by Melinda Stannah Stanley Jothiraj on 02/25/2020.
+ Student number- 1978413
+ Coin class:
+ The coin class inherits from the Class Item and overloads its virtual methods
+ There are no additional data members
+ */
 
 #include "Coin.h"
-
+/**
+ //-------------------------- Default constructor  for class Coin  ------------------------------------//
+ Create and new Coin Object by calling Item constructor
+ */
 Coin::Coin():Item(){
    
 }
@@ -20,8 +31,12 @@ Coin:: ~Coin(){
  @return boolean true if same or false if not
  */
 bool Coin::operator==(const Comparable& right) const{
+   if(Item::operator==(right)){
    const Coin &c = static_cast<const Coin &>(right);
    return (name == c.name && grade ==c.grade && year ==c.year);
+   } else {
+      return false;
+   }
 }
 
 /**
@@ -32,8 +47,12 @@ bool Coin::operator==(const Comparable& right) const{
  @return boolean true if different or false if not
  */
 bool Coin::operator!=(const Comparable& right)const{
+   if(Item::operator==(right)){
    const Coin &c = static_cast<const Coin &>(right);
    return !(name ==c.name && grade ==c.grade && year ==c.year);
+   } else {
+      return false;
+   }
 }
 
 
@@ -45,19 +64,23 @@ bool Coin::operator!=(const Comparable& right)const{
  @return boolean true is left is smaller than right
  */
 bool Coin::operator<(const Comparable& right)const{
-//   if(Item::operator<(right)){
-//   }
+   bool result = false;
+   if(Item::operator==(right)){
    const Coin &c = static_cast<const Coin &>(right);
-   if(name < c.name) return true;
+   if(name < c.name) result = true;
    else if(name == c.name){
-      if (grade < c.grade) return true;
+      if (grade < c.grade) result = true;
       else if(grade == c.grade){
-         if(year < c.year) return true;
-         else if(year == c.year) return false;
+         if(year < c.year) result = true;
       }
    }
-   return false;
+   return result;
+   }
+   else {
+      return Item::operator<(right);
+   }
 }
+
 
 /**
  //-------------------------- Overloaded greater than operator >  ------------------------------------//
@@ -67,16 +90,21 @@ bool Coin::operator<(const Comparable& right)const{
  @return boolean true is left is larger than right
  */
 bool Coin::operator>(const Comparable& right)const{
-   const Coin &c = static_cast<const Coin &>(right);
-   if(name > c.name) return true;
-   else if(name == c.name){
-      if (grade > c.grade) return true;
-      else if(grade == c.grade){
-         if(year > c.year) return true;
-         else if(year == c.year) return false;
+   bool result = false;
+   if(Item::operator==(right)){
+      const Coin &c = static_cast<const Coin &>(right);
+      if(name > c.name) result = true;
+      else if(name == c.name){
+         if (grade > c.grade) result = true;
+         else if(grade == c.grade){
+            if(year > c.year) result = true;
+         }
       }
+      return result;
    }
-   return false;
+   else {
+      return Item::operator>(right);
+   }
 }
 
 /**
@@ -98,14 +126,15 @@ void Coin::setData(std::string stringCount, std::string description){
    year = tokens[0];
    grade = tokens[1];;
    name = tokens[2];
+   type = "Coin";
 }
 /**
  //-------------------------- Parametric constructor  for class Coin  ------------------------------------//
  Create and new Item Object with the description provided
  */
- Item* Coin::create() const {
-     return new Coin;
-  }
+Item* Coin::create() const {
+   return new Coin;
+}
 
 /**
  *  Output a textual representation of this instance to the output stream.
@@ -120,7 +149,7 @@ std::string Coin::toString() const {
 
 
 /**
- *  Output a textual representation of this instance to the output stream.
+ *  Output a textual representation of this instance to a string
  *  @pre This instance must be initialized.
  *  @post A textual representation of this instance is appended to a string and returned
  *  @return A textual representation of this instance is appended to a string
@@ -130,9 +159,10 @@ std::string Coin::toStringWithoutCount()const{
 }
 
 /**
- //--------------------------Overloaded output operator <<  ------------------------------------//
- Preconditions: A comparable object is created and its data is set
- Postconditions: Outputs the Comparable objects
+ *  Output a textual representation of this instance to the output stream
+ *  @pre This instance must be initialized.
+ *  @post A textual representation of this instance is appended to a output stream and returned
+ *  @return A textual representation of this instance is appended to output stream
  */
 std::ostream& operator<<(std::ostream& out, const Coin& obj1) {
    out << obj1.toString();

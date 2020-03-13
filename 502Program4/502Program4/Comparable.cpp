@@ -1,4 +1,10 @@
-
+/*
+ Comparable.cpp
+ Created by Melinda Stannah Stanley Jothiraj on 02/25/2020.
+ Student number- 1978413
+ Comparable class:
+ The comparable class is an abstract class with pure virtual methods that help in comparison between comaprable objects.
+ */
 #include "Comparable.h"
 
 /**

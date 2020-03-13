@@ -2,25 +2,14 @@
 #include "Hashtable.h"
 
 /**
- //-------------------------- Default construtcor ------------------------------------//
- Preconditions: None
- Postconditions: The Hashtable is created with table size of buckets
- */
-//Hashtable::Hashtable(){
-//   table = new HashNode* [totalBuckets];
-//   for (int i = 0; i< 101; i++) {
-//      table[i] = nullptr;
-//   }
-//}
-/**
  //-------------------------- Parametric  construtcor ------------------------------------//
  Preconditions: None
  Postconditions: The Hashtable is created with table size of buckets
  */
 Hashtable::Hashtable(const int buckets){
    totalBuckets = buckets;
-   table = new HashNode* [buckets];
-   for (int i = 0; i< buckets; i++) {
+   table = new HashNode* [totalBuckets];
+   for (int i = 0; i< totalBuckets; i++) {
       table[i] = nullptr;
    }
 }
@@ -37,11 +26,11 @@ Hashtable::~Hashtable(){
  Preconditions: The Hashtable is created
  Postconditions: The Hashtable has a new Hashentry
  */
-void Hashtable::insert(std::string k, HashValueType* v){
+void Hashtable::insert(const std::string k, HashValueType* v){
    int hashIndex = getHashIndex(k);
    HashNode *prev = NULL;
    HashNode *entry = table[hashIndex];
-   while (entry != NULL) {   //&& entry->key != k
+   while (entry != NULL) {
       prev = entry;
       entry = entry->next;
    }
@@ -68,7 +57,7 @@ void Hashtable::insert(std::string k, HashValueType* v){
  Preconditions: The Hashtable is created and filled HashEntries
  Postconditions: a  Hashentry is removed based on the key k
  */
-void Hashtable::remove(std::string k){
+void Hashtable::remove(const std::string k){
    int hashIndex = getHashIndex(k);
    HashNode *prev = NULL;
    HashNode *entry = table[hashIndex];
@@ -90,7 +79,7 @@ void Hashtable::remove(std::string k){
       } else {
          prev->next = entry->next;
       }
-      delete entry; //-----check for memory leaks
+      delete entry;
    }
 }
 
@@ -100,7 +89,7 @@ void Hashtable::remove(std::string k){
  Postconditions: a boolean true if the key exists and false is not
  @return a boolean true if the key exists and false is not
  */
-bool Hashtable::containsKey(std::string key) const{
+bool Hashtable::containsKey(const std::string key) const{
    int hashIndex = getHashIndex(key);
    HashNode *entry = table[hashIndex];
    while (entry != NULL) {
@@ -117,7 +106,7 @@ bool Hashtable::containsKey(std::string key) const{
  Postconditions: HashValueType* from the Hashtable depending upon the key k
  @return HashValueType* from the Hashtable
  */
-HashValueType* Hashtable::getValue(std::string k) const{
+HashValueType* Hashtable::getValue(const std::string k) const{
    int hashIndex = getHashIndex(k);
    HashNode *entry = table[hashIndex];
    while (entry != NULL) {
@@ -138,10 +127,14 @@ bool Hashtable::isEmpty() const{
    return totalBuckets==0;
 }
 
+/**
+ //-------------------------- getHashIndex ------------------------------------//
+ Preconditions: The Hashtable is created
+ Postconditions: The parametric k is hashed
+ @return hashcode of type integer
+ */
+int Hashtable::getHashIndex(const std::string k) const{
 
-int Hashtable::getHashIndex(std::string k) const{
-//  int intCount = atoi(k.c_str());
-//   return intCount % totalBuckets;
    int hashVal = 0;
    
    for(int i = 0; i<k.length();  i++)
@@ -174,12 +167,22 @@ void Hashtable::clear(){
   delete [] table;
 }
 
-
+/**
+ //-------------------------- isEmpty ------------------------------------//
+ Preconditions:The Hashtable is created and filled with HashEntries
+ Postconditions: size of Hashtable is found out
+ @return size of the  Hashtable i.e. number of entries
+ */
 int Hashtable::size() const{
    return totalBuckets;
 }
 
-
+/**
+ //-------------------------- getHashIndex ------------------------------------//
+ Preconditions: The Hashtable is created
+ Postconditions: The values are added to a vector by traversing the list
+ @return vector of values
+ */
 std::vector<HashValueType*> Hashtable::getContents() const{
    std::vector<HashValueType*> contents;
    for(int i=0; i< totalBuckets; i++){
